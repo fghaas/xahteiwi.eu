@@ -82,18 +82,18 @@ xahteiwi.eu            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
-                <h2><a href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-recovering-full-cluster-shutdown/index.html">Recovering from full cluster shutdown</a></h2>
+                <h2><a href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-recovering-full-cluster-shutdown/">Recovering from full cluster shutdown</a></h2>
                 <div class="summary"><p>If at any time <em>all</em> of the nodes in your cluster have been taken
 down, it is necessary to re-initialize the Galera replication
 state. In effect, this is identical to bootstrapping the cluster.</p>
 <p>Start by manually bringing up the cluster IP on one of your nodes:</p>
 <div class="highlight"><pre><span></span>ip address add <span class="m">192 …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-recovering-full-cluster-shutdown/index.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-recovering-full-cluster-shutdown/">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-setting-galera-specific-mysql-options/index.html">Setting Galera-specific MySQL options</a></h2>
+                <h2><a href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-setting-galera-specific-mysql-options/">Setting Galera-specific MySQL options</a></h2>
                 <div class="summary"><p>Now you can proceed with setting Galera specifics in your MySQL
 configurations.</p>
 <p>Create a configuration file, <strong>identical on all cluster nodes,</strong> named
@@ -106,12 +106,12 @@ configurations.</p>
 <span class="na">innodb_locks_unsafe_for_binlog</span><span class="o">=</span><span class="s">1</span>
 </pre></div>
 <p>Create another configuration file …</p>
-                    <a class="btn btn-default btn-xs" href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-setting-galera-specific-mysql-options/index.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-setting-galera-specific-mysql-options/">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-starting-pacemaker/index.html">Starting Pacemaker</a></h2>
+                <h2><a href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-starting-pacemaker/">Starting Pacemaker</a></h2>
                 <div class="summary"><p>Once Corosync is running, you are able to start the Pacemaker cluster
 resource manager on all cluster nodes:</p>
 <div class="highlight"><pre><span></span>service pacemaker start
@@ -121,12 +121,12 @@ the following when invoking the <code>crm_mon</code> utility:</p>
 <div class="highlight"><pre><span></span>============
 Last updated: Mon Dec  3 15:37:59 2012
 Last change …</pre></div>
-                    <a class="btn btn-default btn-xs" href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-starting-pacemaker/index.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-starting-pacemaker/">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-testing-resource-recovery/index.html">Testing resource recovery</a></h2>
+                <h2><a href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-testing-resource-recovery/">Testing resource recovery</a></h2>
                 <div class="summary"><p>If MySQL happens to die in your cluster, Pacemaker will automatically
 recover the service in place. To test this, select any node on your
 cluster and send the <code>mysqld</code> process a <code>KILL</code> signal:</p>
@@ -134,12 +134,12 @@ cluster and send the <code>mysqld</code> process a <code>KILL</code> signal:</p>
 </pre></div>
 <p>Then, monitor your cluster status with <code>crm_mon -rf</code>. After a few
 seconds, you should …</p>
-                    <a class="btn btn-default btn-xs" href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-testing-resource-recovery/index.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-testing-resource-recovery/">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/migrating-virtual-machines-block-based-storage-radosceph/index.html">Migrating virtual machines from block-based storage to RADOS/Ceph</a></h2>
+                <h2><a href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/migrating-virtual-machines-block-based-storage-radosceph/">Migrating virtual machines from block-based storage to RADOS/Ceph</a></h2>
                 <div class="summary"><p>Ceph allows you to replace existing SAN storage (or SAN drop-in
 substitutes) with a flexible storage solution with real scale-out
 capabilities. Here is how you migrate existing virtual machines
@@ -147,7 +147,7 @@ managed by libvirt from block-based storage to a Ceph based storage
 solution.</p>
 <h2>Prerequisites</h2>
 <p>What you'll need in order to successfully manage …</p>
-                    <a class="btn btn-default btn-xs" href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/migrating-virtual-machines-block-based-storage-radosceph/index.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/migrating-virtual-machines-block-based-storage-radosceph/">more ...</a>
                 </div>
             </article>
             <hr/>
