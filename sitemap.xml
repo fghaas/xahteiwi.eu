@@ -4,910 +4,910 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitem
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/</loc>
-<lastmod>2019-03-03T13:35:23-00:00</lastmod>
+<loc>https://fghaas.github.io/xahteiwi.eu/</loc>
+<lastmod>2019-03-03T18:28:25-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/archives.html</loc>
-<lastmod>2019-03-03T13:35:23-00:00</lastmod>
+<loc>https://fghaas.github.io/xahteiwi.eu/archives.html</loc>
+<lastmod>2019-03-03T18:28:25-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tags.html</loc>
-<lastmod>2019-03-03T13:35:23-00:00</lastmod>
+<loc>https://fghaas.github.io/xahteiwi.eu/tags.html</loc>
+<lastmod>2019-03-03T18:28:25-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/categories.html</loc>
-<lastmod>2019-03-03T13:35:23-00:00</lastmod>
+<loc>https://fghaas.github.io/xahteiwi.eu/categories.html</loc>
+<lastmod>2019-03-03T18:28:25-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/index/</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/index/</loc>
 <lastmod>2018-12-07T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/1000-routers-per-tenant-think-again/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/1000-routers-per-tenant-think-again/index.html</loc>
 <lastmod>2018-12-08T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2018/02/18/working-from-home-with-little-kids/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2018/02/18/working-from-home-with-little-kids/index.html</loc>
 <lastmod>2018-02-18T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/more-recommendations-ceph-openstack/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/more-recommendations-ceph-openstack/index.html</loc>
 <lastmod>2017-08-03T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/importing-rbd-into-glance/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/importing-rbd-into-glance/index.html</loc>
 <lastmod>2017-02-17T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/replace-edx-forum/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/replace-edx-forum/index.html</loc>
 <lastmod>2017-02-02T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/dos-donts-ceph-openstack/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/dos-donts-ceph-openstack/index.html</loc>
 <lastmod>2016-11-28T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/high-availability-and-disaster-recovery-in-openstack/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/high-availability-and-disaster-recovery-in-openstack/index.html</loc>
 <lastmod>2016-11-07T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/heat-and-its-alternatives-application-deployment-in-openstack/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/heat-and-its-alternatives-application-deployment-in-openstack/index.html</loc>
 <lastmod>2016-10-27T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/cephfs-and-lxc-container-high-availability-and-scalability-redefined/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/cephfs-and-lxc-container-high-availability-and-scalability-redefined/index.html</loc>
 <lastmod>2016-10-06T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2016/07/05/fragile-development/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2016/07/05/fragile-development/index.html</loc>
 <lastmod>2016-07-05T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/wipe-suse-openstack-cloud-config/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/wipe-suse-openstack-cloud-config/index.html</loc>
 <lastmod>2016-07-05T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2016/02/21/containers-just-because-everyone-else/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2016/02/21/containers-just-because-everyone-else/index.html</loc>
 <lastmod>2016-02-21T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2016/02/12/dogfooding-dogwood/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2016/02/12/dogfooding-dogwood/index.html</loc>
 <lastmod>2016-02-12T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/pacemakers-best-kept-secret/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/pacemakers-best-kept-secret/index.html</loc>
 <lastmod>2016-02-03T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/hosting-website-radosgw/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/hosting-website-radosgw/index.html</loc>
 <lastmod>2016-01-26T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2016/01/05/my-first-open-edx-contribution/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2016/01/05/my-first-open-edx-contribution/index.html</loc>
 <lastmod>2016-01-05T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/removing-buckets-in-radosgw-and-their-contents/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/removing-buckets-in-radosgw-and-their-contents/index.html</loc>
 <lastmod>2015-12-23T11:34:34+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/ubuntu-openstack-juju-4-nodes/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/ubuntu-openstack-juju-4-nodes/index.html</loc>
 <lastmod>2015-12-23T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/radosgw-utilization-one-liner/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/radosgw-utilization-one-liner/index.html</loc>
 <lastmod>2015-12-17T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/understanding-radosgw-benchmarks/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/understanding-radosgw-benchmarks/index.html</loc>
 <lastmod>2015-11-18T14:01:42+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/ictfocus2015/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/ictfocus2015/index.html</loc>
 <lastmod>2015-11-10T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/openstacksummit2015-tokyo-neutron-ha/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/openstacksummit2015-tokyo-neutron-ha/index.html</loc>
 <lastmod>2015-10-28T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/automated-openstack-deployment-a-comparison/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/automated-openstack-deployment-a-comparison/index.html</loc>
 <lastmod>2015-10-27T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/open-edx/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/open-edx/index.html</loc>
 <lastmod>2015-10-12T05:45:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/openedxcon2015/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/openedxcon2015/index.html</loc>
 <lastmod>2015-10-12T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/manageable-application-containers/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/manageable-application-containers/index.html</loc>
 <lastmod>2015-10-07T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/osil2015-orchestration/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/osil2015-orchestration/index.html</loc>
 <lastmod>2015-06-15T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/ceph-tech-talk-pg/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/ceph-tech-talk-pg/index.html</loc>
 <lastmod>2015-05-27T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/ceph-intro/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/ceph-intro/index.html</loc>
 <lastmod>2014-11-15T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/ceph-day-london/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/ceph-day-london/index.html</loc>
 <lastmod>2014-10-22T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/lceu2014-openstack-ha/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/lceu2014-openstack-ha/index.html</loc>
 <lastmod>2014-10-14T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/hands-trove-database-service-openstack/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/hands-trove-database-service-openstack/index.html</loc>
 <lastmod>2014-03-27T11:17:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/fun-extended-attributes-ceph-dumpling/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/fun-extended-attributes-ceph-dumpling/index.html</loc>
 <lastmod>2014-02-24T16:50:17+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/unrecoverable-unfound-objects-ceph-067-and-earlier/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/unrecoverable-unfound-objects-ceph-067-and-earlier/index.html</loc>
 <lastmod>2014-01-28T18:52:02+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2014/01/20/linuxconfau-2014-or-my-annual-journey-to-awesome/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2014/01/20/linuxconfau-2014-or-my-annual-journey-to-awesome/index.html</loc>
 <lastmod>2014-01-20T11:36:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/greetings-from-havana/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/greetings-from-havana/index.html</loc>
 <lastmod>2013-12-10T00:00:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/ceph-object-storage-block-storage-file-system-replication-massive-scalabilit/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/ceph-object-storage-block-storage-file-system-replication-massive-scalabilit/index.html</loc>
 <lastmod>2013-05-31T08:02:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/ceph-storage-stack-openstack/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/ceph-storage-stack-openstack/index.html</loc>
 <lastmod>2013-05-28T11:49:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2013/05/07/enter-the-cuttlefish/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2013/05/07/enter-the-cuttlefish/index.html</loc>
 <lastmod>2013-05-07T07:43:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/more-reliable-more-resilient-more-redundant/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/more-reliable-more-resilient-more-redundant/index.html</loc>
 <lastmod>2013-04-17T16:33:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2013/02/21/high-availability-update-you-can-now-vote-our-talk-into-the-openstack-summit/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2013/02/21/high-availability-update-you-can-now-vote-our-talk-into-the-openstack-summit/index.html</loc>
 <lastmod>2013-02-21T06:59:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/high-availability-update-grizzly-and-havana/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/high-availability-update-grizzly-and-havana/index.html</loc>
 <lastmod>2013-02-20T12:58:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2013/01/28/my-week-at-linuxconfau-2013/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2013/01/28/my-week-at-linuxconfau-2013/index.html</loc>
 <lastmod>2013-01-28T01:27:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/solid-state-drives-and-ceph-osd-journals/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/solid-state-drives-and-ceph-osd-journals/index.html</loc>
 <lastmod>2013-01-13T20:33:58+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2012/12/16/thoughts-on-ecosystems/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2012/12/16/thoughts-on-ecosystems/index.html</loc>
 <lastmod>2012-12-16T14:47:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2012/12/06/on-the-merits-of-working-from-home-in-a-distributed-virtual-team/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2012/12/06/on-the-merits-of-working-from-home-in-a-distributed-virtual-team/index.html</loc>
 <lastmod>2012-12-06T17:38:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-adding-mysqlgalera-resources-pacemaker/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-adding-mysqlgalera-resources-pacemaker/index.html</loc>
 <lastmod>2012-12-04T10:53:27+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-bootstrapping-galera-cluster/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-bootstrapping-galera-cluster/index.html</loc>
 <lastmod>2012-12-04T10:53:27+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-configuring-corosync/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-configuring-corosync/index.html</loc>
 <lastmod>2012-12-04T10:53:27+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-dealing-node-failure/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-dealing-node-failure/index.html</loc>
 <lastmod>2012-12-04T10:53:27+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-high-availability-clusters/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-high-availability-clusters/index.html</loc>
 <lastmod>2012-12-04T10:53:27+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-recovering-full-cluster-shutdown/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-recovering-full-cluster-shutdown/index.html</loc>
 <lastmod>2012-12-04T10:53:27+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-setting-galera-specific-mysql-options/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-setting-galera-specific-mysql-options/index.html</loc>
 <lastmod>2012-12-04T10:53:27+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-starting-pacemaker/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-starting-pacemaker/index.html</loc>
 <lastmod>2012-12-04T10:53:27+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-testing-resource-recovery/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-testing-resource-recovery/index.html</loc>
 <lastmod>2012-12-04T10:53:27+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/mysql-high-availability-deep-dive/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/mysql-high-availability-deep-dive/index.html</loc>
 <lastmod>2012-12-03T13:50:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/glusterfs-high-availability-clusters/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/glusterfs-high-availability-clusters/index.html</loc>
 <lastmod>2012-11-08T08:15:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/hands-ceph/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/hands-ceph/index.html</loc>
 <lastmod>2012-11-08T08:15:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2012/10/24/talking-ceph-and-glusterfs-at-linuxcon-europe/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2012/10/24/talking-ceph-and-glusterfs-at-linuxcon-europe/index.html</loc>
 <lastmod>2012-10-24T12:55:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/migrating-virtual-machines-block-based-storage-radosceph/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/migrating-virtual-machines-block-based-storage-radosceph/index.html</loc>
 <lastmod>2012-10-22T15:31:23+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2012/09/26/pacemaker-and-the-recent-github-service-interruption/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2012/09/26/pacemaker-and-the-recent-github-service-interruption/index.html</loc>
 <lastmod>2012-09-26T11:32:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/maintenance-active-pacemaker-clusters/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/maintenance-active-pacemaker-clusters/index.html</loc>
 <lastmod>2012-09-24T19:49:31+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/high-availability-openstack/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/high-availability-openstack/index.html</loc>
 <lastmod>2012-08-30T15:48:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2012/08/20/speaking-and-bofing-at-cloudopen-in-san-diego/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2012/08/20/speaking-and-bofing-at-cloudopen-in-san-diego/index.html</loc>
 <lastmod>2012-08-20T07:26:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/highly-available-cloud-pacemaker-integration-openstack/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/highly-available-cloud-pacemaker-integration-openstack/index.html</loc>
 <lastmod>2012-07-17T21:12:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/configuring-radosgw-behave-amazon-s3/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/configuring-radosgw-behave-amazon-s3/index.html</loc>
 <lastmod>2012-07-09T08:15:57+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/fencing-vmware-virtualized-pacemaker-nodes/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/fencing-vmware-virtualized-pacemaker-nodes/index.html</loc>
 <lastmod>2012-05-18T09:43:28+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2012/05/03/an-exciting-day-for-the-ceph-community/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2012/05/03/an-exciting-day-for-the-ceph-community/index.html</loc>
 <lastmod>2012-05-03T11:10:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2012/04/24/a-look-back-at-my-first-openstack-design-summit-conference/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2012/04/24/a-look-back-at-my-first-openstack-design-summit-conference/index.html</loc>
 <lastmod>2012-04-24T09:35:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/reliable-redundant-resilient-high-availability-in-openstack/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/reliable-redundant-resilient-high-availability-in-openstack/index.html</loc>
 <lastmod>2012-04-20T15:36:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2012/04/03/speaking-at-oscon-2012/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2012/04/03/speaking-at-oscon-2012/index.html</loc>
 <lastmod>2012-04-03T09:24:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2012/03/28/presentation-accepted-for-openstack-spring-2012-conference/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2012/03/28/presentation-accepted-for-openstack-spring-2012-conference/index.html</loc>
 <lastmod>2012-03-28T19:52:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mandatory-and-advisory-ordering-pacemaker/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mandatory-and-advisory-ordering-pacemaker/index.html</loc>
 <lastmod>2012-03-22T15:02:14+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2012/03/21/high-availability-in-openstack/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2012/03/21/high-availability-in-openstack/index.html</loc>
 <lastmod>2012-03-21T13:08:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2012/03/20/on-my-ex-maintainership-of-the-drbd-users-guide/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2012/03/20/on-my-ex-maintainership-of-the-drbd-users-guide/index.html</loc>
 <lastmod>2012-03-20T11:01:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/managing-cron-jobs-pacemaker/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/managing-cron-jobs-pacemaker/index.html</loc>
 <lastmod>2012-03-19T16:42:40+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/storage-replication-high-performance-high-availability-environments/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/storage-replication-high-performance-high-availability-environments/index.html</loc>
 <lastmod>2012-03-19T10:54:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/roll-your-own-cloud/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/roll-your-own-cloud/index.html</loc>
 <lastmod>2012-03-19T08:27:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/whats-totem-retransmit-list-all-about-corosync/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/whats-totem-retransmit-list-all-about-corosync/index.html</loc>
 <lastmod>2012-03-15T09:11:34+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/zen-pacemaker/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/zen-pacemaker/index.html</loc>
 <lastmod>2012-03-13T13:37:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/which-osd-stores-specific-rados-object/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/which-osd-stores-specific-rados-object/index.html</loc>
 <lastmod>2012-03-09T22:55:06+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2012/03/08/ceph-tickling-my-geek-genes/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2012/03/08/ceph-tickling-my-geek-genes/index.html</loc>
 <lastmod>2012-03-08T20:12:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/solve-drbd-split-brain-4-steps/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/solve-drbd-split-brain-4-steps/index.html</loc>
 <lastmod>2012-03-06T01:29:24+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/checking-corosync-cluster-membership/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/checking-corosync-cluster-membership/index.html</loc>
 <lastmod>2012-03-04T23:42:35+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/fencing-libvirtkvm-virtualized-cluster-nodes/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/fencing-libvirtkvm-virtualized-cluster-nodes/index.html</loc>
 <lastmod>2012-02-29T13:56:42+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/network-connectivity-check-pacemaker/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/network-connectivity-check-pacemaker/index.html</loc>
 <lastmod>2012-02-27T17:45:19+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/blog/2012/02/27/speaking-2012-percona-live-mysql-conference/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/blog/2012/02/27/speaking-2012-percona-live-mysql-conference/index.html</loc>
 <lastmod>2012-02-27T13:39:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/gfs2-pacemaker-debianubuntu/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/gfs2-pacemaker-debianubuntu/index.html</loc>
 <lastmod>2012-02-26T20:34:08+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/interleaving-pacemaker-clones/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/interleaving-pacemaker-clones/index.html</loc>
 <lastmod>2012-02-26T20:34:08+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/ocfs2-pacemaker-debianubuntu/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/ocfs2-pacemaker-debianubuntu/index.html</loc>
 <lastmod>2012-02-24T17:01:20+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/fencing-and-maintaining-sanity-high-availability-clusters/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/fencing-and-maintaining-sanity-high-availability-clusters/index.html</loc>
 <lastmod>2011-11-01T13:45:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/resources/presentations/mysql-high-availability-sprint-launch-pacemaker/index.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/resources/presentations/mysql-high-availability-sprint-launch-pacemaker/index.html</loc>
 <lastmod>2011-11-01T13:45:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/category/blogs.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/category/blogs.html</loc>
 <lastmod>2018-02-18T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/category/hints-and-kinks.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/category/hints-and-kinks.html</loc>
 <lastmod>2018-12-08T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/category/presentations.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/category/presentations.html</loc>
 <lastmod>2016-11-07T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/openstack.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/openstack.html</loc>
 <lastmod>2018-12-08T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/philosophy.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/philosophy.html</loc>
 <lastmod>2018-02-18T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/ceph.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/ceph.html</loc>
 <lastmod>2017-08-03T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/open-edx.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/open-edx.html</loc>
 <lastmod>2017-02-02T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/high-availability.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/high-availability.html</loc>
 <lastmod>2016-11-07T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/heat.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/heat.html</loc>
 <lastmod>2016-10-27T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/ansible.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/ansible.html</loc>
 <lastmod>2016-10-27T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/juju.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/juju.html</loc>
 <lastmod>2016-10-27T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/cloudify.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/cloudify.html</loc>
 <lastmod>2016-10-27T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/lxc.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/lxc.html</loc>
 <lastmod>2016-10-06T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/development.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/development.html</loc>
 <lastmod>2016-07-05T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/suse.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/suse.html</loc>
 <lastmod>2016-07-05T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/containers.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/containers.html</loc>
 <lastmod>2016-02-21T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/ubuntu.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/ubuntu.html</loc>
 <lastmod>2016-02-21T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/pacemaker.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/pacemaker.html</loc>
 <lastmod>2016-02-03T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/python.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/python.html</loc>
 <lastmod>2015-12-17T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/conference.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/conference.html</loc>
 <lastmod>2015-11-10T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/mysql.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/mysql.html</loc>
 <lastmod>2014-03-27T11:17:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/lca2014.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/lca2014.html</loc>
 <lastmod>2014-01-20T11:36:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/performance.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/performance.html</loc>
 <lastmod>2013-01-13T20:33:58+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/galera.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/galera.html</loc>
 <lastmod>2012-12-04T10:53:27+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/glusterfs.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/glusterfs.html</loc>
 <lastmod>2012-11-08T08:15:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/libvirt.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/libvirt.html</loc>
 <lastmod>2012-10-22T15:31:23+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/oscon.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/oscon.html</loc>
 <lastmod>2012-04-03T09:24:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/drbd.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/drbd.html</loc>
 <lastmod>2012-03-20T11:01:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/flashcache.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/flashcache.html</loc>
 <lastmod>2012-03-19T10:54:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/kvm.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/kvm.html</loc>
 <lastmod>2012-03-19T08:27:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/tag/corosync.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/tag/corosync.html</loc>
 <lastmod>2012-03-15T09:11:34+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/author/florian.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/author/florian.html</loc>
 <lastmod>2018-02-18T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>fghaas.github.io/xahteiwi.eu/author/florian-haas.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/author/florian-haas.html</loc>
 <lastmod>2018-12-08T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
