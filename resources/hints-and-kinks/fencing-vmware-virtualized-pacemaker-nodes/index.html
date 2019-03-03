@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Fencing in VMware virtualized Pacemaker nodes - xahteiwi.eu</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/fencing-vmware-virtualized-pacemaker-nodes/index.html">
+
+        <meta name="author" content="Florian Haas" />
+        <meta name="keywords" content="Pacemaker" />
+        <meta name="description" content="For users of VMware virtualization, it&#39;s becoming increasingly common to deploy Pacemaker clusters within the virtual infrastructure. Doing this requires that you set up fencing via ESX Server or, more commonly, vCenter. Here&#39;s how to do that. The cluster-glue package contains node Pacemaker&#39;s fencing (STONITH) plugins, one of which is …" />
+
+        <meta property="og:site_name" content="xahteiwi.eu" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Fencing in VMware virtualized Pacemaker nodes"/>
+        <meta property="og:url" content="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/fencing-vmware-virtualized-pacemaker-nodes/index.html"/>
+        <meta property="og:description" content="For users of VMware virtualization, it&#39;s becoming increasingly common to deploy Pacemaker clusters within the virtual infrastructure. Doing this requires that you set up fencing via ESX Server or, more commonly, vCenter. Here&#39;s how to do that. The cluster-glue package contains node Pacemaker&#39;s fencing (STONITH) plugins, one of which is …"/>
+        <meta property="article:published_time" content="2012-05-18" />
+            <meta property="article:section" content="hints-and-kinks" />
+            <meta property="article:tag" content="Pacemaker" />
+            <meta property="article:author" content="Florian Haas" />
+
+    <meta name="twitter:dnt" content="on">
+    <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@xahteiwi">
+        <meta name="twitter:creator" content="@xahteiwi">
+    <meta name="twitter:domain" content="fghaas.github.io/xahteiwi.eu">
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="fghaas.github.io/xahteiwi.eu/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="fghaas.github.io/xahteiwi.eu/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="fghaas.github.io/xahteiwi.eu/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="fghaas.github.io/xahteiwi.eu/theme/css/style.css" type="text/css"/>
+
+        <link href="fghaas.github.io/xahteiwi.eu/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="xahteiwi.eu ATOM Feed"/>
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="fghaas.github.io/xahteiwi.eu/" class="navbar-brand">
+xahteiwi.eu            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/hints-and-kinks/">Hints and Kinks</a></li>
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/presentations/">Presentations</a></li>
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/blogs/">Blog</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/fencing-vmware-virtualized-pacemaker-nodes/index.html"
+                       rel="bookmark"
+                       title="Permalink to Fencing in VMware virtualized Pacemaker nodes">
+                        Fencing in VMware virtualized Pacemaker nodes
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2012-05-18T09:43:28+01:00"> Fri 18 May 2012</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="fghaas.github.io/xahteiwi.eu/tag/pacemaker.html">Pacemaker</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>For users of VMware virtualization, it's becoming increasingly common
+to deploy Pacemaker clusters within the virtual infrastructure. Doing
+this requires that you set up fencing via ESX Server or, more
+commonly, vCenter. Here's how to do that.</p>
+<p>The <code>cluster-glue</code> package contains node Pacemaker's fencing (STONITH)
+plugins, one of which is the <code>external/vcenter</code> plugin. It enables
+Pacemaker to interface with an ESX Server host or vCenter server. When
+a Pacemaker node needs to be fenced, the fencing node contacts the
+vCenter host and instructs it to knock out the offending node.</p>
+<p>For this to work, your configuration needs to satisfy a couple of prerequisites:</p>
+<ul>
+<li>
+<p>Your setup needs a reasonably recent cluster-glue package (the one
+  that ships in Debian squeeze-backports and Ubuntu precise is fine).</p>
+</li>
+<li>
+<p>You need to install the <a href="http://www.vmware.com/support/developer/vc-sdk/">vSphere Web Services
+  SDK</a> on your
+  nodes. This itself has a number of Perl prerequisites. On
+  Debian/Ubuntu systems, you should be able to install them with:</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span>aptitude install libarchive-zip-perl libcrypt-ssleay-perl \
+  libclass-methodmaker-perl libuuid-perl \
+  libsoap-lite-perl libxml-libxml-perl
+</pre></div>
+<p>Now, create a set of vCenter credentials with the <code>credstore_admin.pl</code>
+utility that comes bundled with the SDK:</p>
+<div class="highlight"><pre><span></span>/usr/lib/vmware-vcli/apps/general/credstore_admin.pl \
+  -s &lt;vCenter server IP or hostname&gt; \
+  -u &lt;vCenter username&gt; \
+  -p &lt;vCenter password&gt;
+</pre></div>
+<p>This creates a credentials file in
+<code>.vmware/credstore/vicredentials.xml</code> relative to your home
+directory. Copy this file into a location where Pacemaker can find it,
+say <code>/etc/vicredentials.xml</code>, and make sure it gets 0600
+permissions. Also, remember to copy it to all your cluster nodes. Once
+your credentials are properly set up, you can test the STONITH agent's
+functionality by invoking it directly, like so:</p>
+<div class="highlight"><pre><span></span>  <span class="nv">VI_SERVER</span><span class="o">=</span>&lt;vCenter server IP or hostname&gt; <span class="se">\</span>
+  <span class="nv">VI_CREDSTORE</span><span class="o">=</span>/etc/vicredentials.xml <span class="se">\</span>
+  <span class="nv">HOSTLIST</span><span class="o">=</span><span class="s2">"&lt;pacemaker hostname&gt;=&lt;vCenter virtual machine name&gt;"</span> <span class="se">\</span>
+  <span class="nv">RESETPOWERON</span><span class="o">=</span><span class="m">0</span> <span class="se">\</span>
+  /usr/lib/stonith/plugins/external/vcenter gethosts
+</pre></div>
+<p><pacemaker hostname=""> is the name of one of your cluster nodes as per
+uname -n, and <vcenter machine="" name="" virtual=""> is the corresponding
+machine name in your vCenter inventory. If everything is working fine,
+the gethosts command should return the Pacemaker hostname again.</vcenter></pacemaker></p>
+<p>Now, on to adding this to the Pacemaker configuration. The example
+below is for two hosts named alice and bob, which in the inventory
+happen to be listed by their FQDN in the example.com domain:</p>
+<div class="highlight"><pre><span></span>primitive p_fence_alice stonith:external/vcenter \
+  params VI_SERVER="vcenter.example.com" \
+    VI_CREDSTORE="/etc/vicredentials.xml" \
+    HOSTLIST="alice=alice.example.com" \
+    RESETPOWERON="0" \
+    pcmk_host_check="static-list" \
+    pcmk_host_list="alice" \
+  op monitor interval="60"
+primitive p_fence_bob stonith:external/vcenter \
+  params VI_SERVER="vcenter.example.com" \
+    VI_CREDSTORE="/etc/vicredentials.xml" \
+    HOSTLIST="bob=bob.example.com" \
+    RESETPOWERON="0" \
+    pcmk_host_check="static-list" \
+    pcmk_host_list="bob" \
+  op monitor interval="60"
+location l_fence_alice p_fence_alice -inf: alice
+location l_fence_bob p_fence_bob -inf: bob
+property stonith-enabled="true"
+</pre></div>
+<p>At this point you should be able to test fencing with <code>stonith_admin
+-F</code> or <code>crm node fence</code>. Or simulate a node problem with <code>killall -9
+corosync</code>.</p>
+<p>Special thanks for this goes to Nhan Ngo Dinh both for writing the
+plugin in the first place, and for providing an excellent and
+straightforward README file for it.</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="fghaas.github.io/xahteiwi.eu/images/avatar.jpg"/>
+        </p>
+</div><!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://twitter.com/xahteiwi"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+    <li class="list-group-item"><a href="https://www.linkedin.com/in/fghaas"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn</a></li>
+    <li class="list-group-item"><a href="https://reddit.com/u/fghaas"><i class="fa fa-reddit-square fa-lg"></i> Reddit</a></li>
+    <li class="list-group-item"><a href="https://github.com/fghaas"><i class="fa fa-github-square fa-lg"></i> GitHub</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="fghaas.github.io/xahteiwi.eu/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ansible.html">Ansible</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ceph.html">Ceph</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/cloudify.html">Cloudify</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/conference.html">Conference</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/containers.html">Containers</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/corosync.html">Corosync</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/development.html">Development</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/drbd.html">DRBD</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/flashcache.html">Flashcache</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/galera.html">Galera</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/glusterfs.html">GlusterFS</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/heat.html">Heat</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/high-availability.html">High Availability</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/juju.html">Juju</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/kvm.html">KVM</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/lca2014.html">lca2014</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/libvirt.html">libvirt</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/lxc.html">LXC</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/mysql.html">MySQL</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/open-edx.html">Open edX</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/openstack.html">OpenStack</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/oscon.html">OSCON</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/pacemaker.html">Pacemaker</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/performance.html">Performance</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/philosophy.html">Philosophy</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/suse.html">SUSE</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ubuntu.html">Ubuntu</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="/legal" target="_blank">Legal info</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container-fluid">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 Florian Haas
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">Creative Commons Attribution-ShareAlike 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>

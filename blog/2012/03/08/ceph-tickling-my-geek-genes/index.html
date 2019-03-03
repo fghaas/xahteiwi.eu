@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Ceph: tickling my geek genes - xahteiwi.eu</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="fghaas.github.io/xahteiwi.eu/blog/2012/03/08/ceph-tickling-my-geek-genes/index.html">
+
+        <meta name="author" content="florian" />
+        <meta name="keywords" content="Ceph" />
+        <meta name="description" content="Haven&#39;t heard of Ceph, the open-source distributed petascale storage stack? Well, you&#39;ve really been missing out. It&#39;s not just a filesystem. It&#39;s a filesystem, and a striped/replicated block device provider, and a virtualization storage backend, and a cloud object store, and then some. Most of you will, by now …" />
+
+        <meta property="og:site_name" content="xahteiwi.eu" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Ceph: tickling my geek genes"/>
+        <meta property="og:url" content="fghaas.github.io/xahteiwi.eu/blog/2012/03/08/ceph-tickling-my-geek-genes/index.html"/>
+        <meta property="og:description" content="Haven&#39;t heard of Ceph, the open-source distributed petascale storage stack? Well, you&#39;ve really been missing out. It&#39;s not just a filesystem. It&#39;s a filesystem, and a striped/replicated block device provider, and a virtualization storage backend, and a cloud object store, and then some. Most of you will, by now …"/>
+        <meta property="article:published_time" content="2012-03-08" />
+            <meta property="article:section" content="blogs" />
+            <meta property="article:tag" content="Ceph" />
+            <meta property="article:author" content="florian" />
+
+    <meta name="twitter:dnt" content="on">
+    <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@xahteiwi">
+        <meta name="twitter:creator" content="@xahteiwi">
+    <meta name="twitter:domain" content="fghaas.github.io/xahteiwi.eu">
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="fghaas.github.io/xahteiwi.eu/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="fghaas.github.io/xahteiwi.eu/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="fghaas.github.io/xahteiwi.eu/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="fghaas.github.io/xahteiwi.eu/theme/css/style.css" type="text/css"/>
+
+        <link href="fghaas.github.io/xahteiwi.eu/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="xahteiwi.eu ATOM Feed"/>
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="fghaas.github.io/xahteiwi.eu/" class="navbar-brand">
+xahteiwi.eu            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/hints-and-kinks/">Hints and Kinks</a></li>
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/presentations/">Presentations</a></li>
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/blogs/">Blog</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="fghaas.github.io/xahteiwi.eu/blog/2012/03/08/ceph-tickling-my-geek-genes/index.html"
+                       rel="bookmark"
+                       title="Permalink to Ceph: tickling my geek genes">
+                        Ceph: tickling my geek genes
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2012-03-08T20:12:00+00:00"> Thu 08 March 2012</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="fghaas.github.io/xahteiwi.eu/tag/ceph.html">Ceph</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Haven't heard of <a href="http://ceph.com/">Ceph</a>, the open-source distributed
+petascale storage stack? Well, you've really been missing out. It's not
+just a filesystem. It's a filesystem, and a striped/replicated block
+device provider, and a virtualization storage backend, and a cloud
+object store, and then some.</p>
+<p>Most of you will, by now, probably have heard of the Ceph filesystem, a
+distributed, replicated, extremely scaleable filesystem that <a href="http://kernelnewbies.org/Linux_2_6_34#head-87b23f85b5bdd35c0ab58c1ebfdcbd48d1658eef">went
+upstream with the 2.6.34 kernel
+release.</a> But
+that filesystem is really just a client to something that happens server
+side, which is much more than just file storage.</p>
+<p><a href="http://ceph.com/category/rados/">RADOS</a>, the reliable autonomic
+distributed object store is a massively distributed, replicating,
+rack-aware object store. It organizes storage in objects, where each
+object has an identifier, a payload, and a number of attributes.</p>
+<p>Objects are allocated to a Placement Group (PG), and each PG maps to one
+or several Object Storage Devices or OSDs. OSDs are managed by a
+userspace daemon – everything server-side in Ceph is in userspace,
+really – and locally map to a simple directory. For local storage,
+objects simply map to flat files, so OSDs don't need to muck around with
+local block storage. And they can take advantage of lots of useful
+features built into advanced filesystems, like extended attributes,
+clones/reflinks, copy-on-write (with btrfs). Extra points for the effort
+to <em>not</em> reinvent wheels.</p>
+<p>The entire object store uses a deterministic placement algorithm, CRUSH
+(Controlled Replication Under Scaleable Hashing). There's never a
+central instance to ask on every access, instead, everything can work
+out where objects are. That means the store scales out seamlessly, and
+can expand and contract on the admin's whim.</p>
+<p>And based on that basic architecture, there's a number of entry points
+and deployment scenarios for the stack:</p>
+<ul>
+<li><strong>radosgw</strong> provides a RESTful API for dynamic cloud storage. And it
+    includes an S3 and Swift frontend to act as object storage for
+    AWS/Eucalyptus and OpenStack clouds, respectively.</li>
+<li><strong>Qemu-RBD</strong> is a storage driver for the Qemu/KVM hypervisor (fully
+    integrated with libvirt) that allows the hypervisor to access
+    replicated block devices that are also striped across the object
+    store – with a configurable number of replicas, of course.</li>
+<li><strong>RBD</strong> is a Linux block device that, again, is striped and
+    replicated over the object store.</li>
+<li><strong>librados</strong> (C) and <strong>libradospp</strong> (C++) are APIs to access the
+    object store programmatically, and come with a number of scripting
+    language bindings. As you've probably guessed, Qemu-RBD builds on
+    librados.</li>
+<li><strong>Ceph</strong> (the filesystem) exposes POSIX filesystem semantics built
+    on top of RADOS, where all POSIX-related metadata is again stored in
+    the object store. This is a remarkably thin client layer at just
+    17,000 LOC (compare to GFS2 at 26,000 and OCFS2 at 68,000).</li>
+</ul>
+<p>In short: it's cool stuff. And it's 100% open source, it's all under the
+LGPL 2.1, and the developers have made a point of not creating any
+closed-source "enterprise" features – in short, they're not shipping
+crippleware.</p>
+<p>We've recently started contributing to the Ceph project to improve its
+high-availability cluster integration: we've submitted
+<a href="https://www.hastexo.com/knowledge/high-availability/pacemaker">Pacemaker</a>
+agents <a href="https://github.com/ceph/ceph/commit/92cfad42030889d52911814faa717bebbd4dd22f">to monitor the Ceph daemons
+proper</a>
+(a pretty trivial wrapper for a script that ships with Ceph, for now).
+And we've also contributed <a href="https://github.com/ceph/ceph/commit/c31b86963ab3c51b5c6d17f6e3222fe164ef3ee9">a resource agent to manage an RBD device as
+a Pacemaker
+resource</a>.
+The latter gives Pacemaker users the ability to use RBD devices as a
+drop-in replacement for iSCSI devices, MD devices under Pacemaker
+control, or <a href="https://www.hastexo.com/drbd">DRBD</a>. The Ceph community has
+been exceptionally welcoming and has made contributing a pleasure –
+there's no copyright assignment nonsense, no CLAs, just a very positive
+attitude toward outside contributions.</p>
+<p>And in case you want to use a Ceph filesystem as a generally available
+file system in your Pacemaker cluster (as you would with NFS, GlusterFS,
+GFS2, or OCFS2), you can <a href="https://github.com/ClusterLabs/resource-agents/commit/f93668b4b60682363a686a293810e34ad4088a47">do that now,
+too</a>.
+However, please be cautioned that that should be considered an
+experimental feature: the Ceph devs have made it very clear on numerous
+occasions that they're currently focusing on making RADOS and RBD rock
+solid, and then they'll tackle the POSIX filesystem layer to get it out
+of experimental mode.</p>
+<p>We'll publish more on Ceph on our web site over the coming weeks, but
+for those of you at CeBIT in Hannover, Germany this week: my colleague
+<a href="https://www.hastexo.com/who/martin">Martin Loschwitz</a> is <a href="https://www.hastexo.com/blogs/martin/2012/02/27/hastexo-coming-cebit-2012">presenting a
+talk on Ceph (and
+GlusterFS)</a>
+at the CeBIT Open Source Forum tomorrow.</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="fghaas.github.io/xahteiwi.eu/images/avatar.jpg"/>
+        </p>
+</div><!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://twitter.com/xahteiwi"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+    <li class="list-group-item"><a href="https://www.linkedin.com/in/fghaas"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn</a></li>
+    <li class="list-group-item"><a href="https://reddit.com/u/fghaas"><i class="fa fa-reddit-square fa-lg"></i> Reddit</a></li>
+    <li class="list-group-item"><a href="https://github.com/fghaas"><i class="fa fa-github-square fa-lg"></i> GitHub</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="fghaas.github.io/xahteiwi.eu/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ansible.html">Ansible</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ceph.html">Ceph</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/cloudify.html">Cloudify</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/conference.html">Conference</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/containers.html">Containers</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/corosync.html">Corosync</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/development.html">Development</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/drbd.html">DRBD</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/flashcache.html">Flashcache</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/galera.html">Galera</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/glusterfs.html">GlusterFS</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/heat.html">Heat</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/high-availability.html">High Availability</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/juju.html">Juju</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/kvm.html">KVM</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/lca2014.html">lca2014</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/libvirt.html">libvirt</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/lxc.html">LXC</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/mysql.html">MySQL</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/open-edx.html">Open edX</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/openstack.html">OpenStack</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/oscon.html">OSCON</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/pacemaker.html">Pacemaker</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/performance.html">Performance</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/philosophy.html">Philosophy</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/suse.html">SUSE</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ubuntu.html">Ubuntu</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="/legal" target="_blank">Legal info</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container-fluid">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 Florian Haas
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">Creative Commons Attribution-ShareAlike 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>

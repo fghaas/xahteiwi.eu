@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Importing an existing Ceph RBD image into Glance - xahteiwi.eu</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/importing-rbd-into-glance/index.html">
+
+        <meta name="author" content="Florian Haas" />
+        <meta name="keywords" content="Ceph,OpenStack" />
+        <meta name="description" content="As an OpenStack/Ceph operator, you may sometimes want to forgo uploading a new image using the Glance API, because the process can be inefficient and time-consuming. Here&#39;s a faster way." />
+
+        <meta property="og:site_name" content="xahteiwi.eu" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Importing an existing Ceph RBD image into Glance"/>
+        <meta property="og:url" content="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/importing-rbd-into-glance/index.html"/>
+        <meta property="og:description" content="As an OpenStack/Ceph operator, you may sometimes want to forgo uploading a new image using the Glance API, because the process can be inefficient and time-consuming. Here&#39;s a faster way."/>
+        <meta property="article:published_time" content="2017-02-17" />
+            <meta property="article:section" content="hints-and-kinks" />
+            <meta property="article:tag" content="Ceph" />
+            <meta property="article:tag" content="OpenStack" />
+            <meta property="article:author" content="Florian Haas" />
+
+    <meta name="twitter:dnt" content="on">
+    <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@xahteiwi">
+        <meta name="twitter:creator" content="@xahteiwi">
+    <meta name="twitter:domain" content="fghaas.github.io/xahteiwi.eu">
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="fghaas.github.io/xahteiwi.eu/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="fghaas.github.io/xahteiwi.eu/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="fghaas.github.io/xahteiwi.eu/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="fghaas.github.io/xahteiwi.eu/theme/css/style.css" type="text/css"/>
+
+        <link href="fghaas.github.io/xahteiwi.eu/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="xahteiwi.eu ATOM Feed"/>
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="fghaas.github.io/xahteiwi.eu/" class="navbar-brand">
+xahteiwi.eu            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/hints-and-kinks/">Hints and Kinks</a></li>
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/presentations/">Presentations</a></li>
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/blogs/">Blog</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/importing-rbd-into-glance/index.html"
+                       rel="bookmark"
+                       title="Permalink to Importing an existing Ceph RBD image into Glance">
+                        Importing an existing Ceph RBD image into Glance
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-02-17T00:00:00+00:00"> Fri 17 February 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="fghaas.github.io/xahteiwi.eu/tag/ceph.html">Ceph</a>
+        /
+	<a href="fghaas.github.io/xahteiwi.eu/tag/openstack.html">OpenStack</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>The normal process of uploading an image into Glance is
+straightforward: you use <code>glance image-create</code> or <code>openstack image
+create</code>, or the Horizon dashboard. Whichever process you choose, you
+select a local file, which you upload into the Glance image store.</p>
+<p>This process can be unpleasantly time-consuming when your Glance
+service is backed with Ceph RBD, for a practical reason. When using
+the <code>rbd</code> image store, you're expected to use <code>raw</code> images, which have
+interesting characteristics.</p>
+<h2>Raw images and sparse files</h2>
+<p>Most people will take an existing vendor cloud image, which is
+typically available in the <code>qcow2</code> format, and convert it using the
+<code>qemu-img</code> utility, like so:</p>
+<div class="highlight"><pre><span></span>$ wget -O ubuntu-xenial.qcow2 <span class="se">\</span>
+  https://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-disk1.img
+$ qemu-img convert -p -f qcow2 -O raw ubuntu-xenial.qcow2 ubuntu-xenial.raw
+</pre></div>
+<p>On face value, the result looks innocuous enough:</p>
+<div class="highlight"><pre><span></span>$ qemu-img info ubuntu-xenial.qcow2 
+image: ubuntu-xenial.qcow2
+file format: qcow2
+virtual size: <span class="m">2</span>.2G <span class="o">(</span><span class="m">2361393152</span> bytes<span class="o">)</span>
+disk size: 308M
+cluster_size: <span class="m">65536</span>
+Format specific information:
+    compat: <span class="m">0</span>.10
+    refcount bits: <span class="m">16</span>
+
+$ qemu-img info ubuntu-xenial.raw
+image: ubuntu-xenial.raw
+file format: raw
+virtual size: <span class="m">2</span>.2G <span class="o">(</span><span class="m">2361393152</span> bytes<span class="o">)</span>
+disk size: 1000M
+</pre></div>
+<p>As you can see, in both cases the virtual image size differs starkly
+from the actual file size. In <code>qcow2</code>, this is due to the
+copy-on-write nature of the file format and zlib compression; for the
+<code>raw</code> image, we're dealing with a sparse file:</p>
+<div class="highlight"><pre><span></span>$ ls -lh ubuntu-xenial.qcow2
+-rw-rw-r-- <span class="m">1</span> florian florian 308M Feb <span class="m">17</span> <span class="m">10</span>:05 ubuntu-xenial.qcow2
+$ du -h  ubuntu-xenial.qcow2
+308M    ubuntu-xenial.qcow2
+$ ls -lh info ubuntu-xenial.raw
+-rw-r--r-- <span class="m">1</span> florian florian <span class="m">2</span>.2G Feb <span class="m">17</span> <span class="m">10</span>:16 ubuntu-xenial.raw
+$ du -h  ubuntu-xenial.raw
+1000M   ubuntu-xenial.raw
+</pre></div>
+<p>So, while the <code>qcow2</code> file's physical and logical sizes match, the
+<code>raw</code> file looks much larger in terms of filesystem metadata, as
+opposed to its actual storage utilization. That's because in a sparse
+file, "holes" (essentially, sequences of null bytes) aren't actually
+written to the filesystem. Instead, the filesystems just records the
+position and length of each "hole", and when we read from the "holes"
+in the file, the read would just return null bytes again.</p>
+<p>The trouble with sparse files is that RESTful web services, like
+Glance, don't know too much about them. So, if we were to import that
+raw file with <code>openstack image-create --file my_cloud_image.raw</code>, the
+command line client would upload null bytes with happy abandon, which
+would greatly lengthen the process.</p>
+<h2>Importing images into RBD with <code>qemu-img convert</code></h2>
+<p>Luckily for us, <code>qemu-img</code> also allows us to upload <em>directly</em> into
+RBD. All you need to do is make sure the image goes into the correct
+pool, and is reasonably named. Glance names uploaded images by their
+image ID, which is a universally unique identifier (UUID), so let's
+follow Glance's precedent.</p>
+<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">IMAGE_ID</span><span class="o">=</span><span class="sb">`</span>uuidgen<span class="sb">`</span>
+<span class="nb">export</span> <span class="nv">POOL</span><span class="o">=</span><span class="s2">"glance-images"</span>  <span class="c1"># replace with your Glance pool name</span>
+
+qemu-img convert <span class="se">\</span>
+  -f qcow2 -O raw <span class="se">\</span>
+  my_cloud_image.raw <span class="se">\</span>
+  rbd:<span class="nv">$POOL</span>/<span class="nv">$IMAGE_ID</span>
+</pre></div>
+<h2>Creating the clone baseline snapshot</h2>
+<p>Glance expects a snapshot named <code>snap</code> to exist on any image that is
+subsequently cloned by Cinder or Nova, so let's create that as
+well:</p>
+<div class="highlight"><pre><span></span>rbd snap create <span class="nv">$POOL</span>/<span class="nv">$IMAGE_ID</span>@snap
+rbd snap protect <span class="nv">$POOL</span>/<span class="nv">$IMAGE_ID</span>@snap
+</pre></div>
+<h2>Making Glance aware of the image</h2>
+<p>Finally, we can let Glance know about this image. Now, there's a catch
+to this: this trick <em>only</em> works with the Glance v1 API, and thus you
+<em>must</em> use the <code>glance</code> client to do it. Your Glance is v2 only?
+Sorry. Insist on using the <code>openstack</code> client? Out of luck.</p>
+<p>What's special about this invocation of the <code>glance</code> client are simply
+the pre-populated <code>location</code> and <code>id</code> fields. The <code>location</code> is composed of the following segments:</p>
+<ul>
+<li>the fixed string <code>rbd://</code>,</li>
+<li>your Ceph cluster UUID (you get this from <code>ceph fsid</code>),</li>
+<li>a forward slash (<code>/</code>),</li>
+<li>the name of the pool that the image is stored in,</li>
+<li>the name of your image (which you previously created with <code>uuidgen</code>),</li>
+<li>another forward slash (<code>/</code>, not <code>@</code> as you might expect),</li>
+<li>and finally, the name of your snapshot (<code>snap</code>).</li>
+</ul>
+<p>Other than that, the <code>glance</code> client invocation is pretty
+straightforward for a v1 API call:</p>
+<div class="highlight"><pre><span></span><span class="nv">CLUSTER_ID</span><span class="o">=</span><span class="sb">`</span>ceph fsid<span class="sb">`</span>
+glance --os-image-api-version <span class="m">1</span> <span class="se">\</span>
+  image-create <span class="se">\</span>
+  --disk-format raw <span class="se">\</span>
+  --id <span class="nv">$IMAGE_ID</span> <span class="se">\</span>
+  --location rbd://<span class="nv">$CLUSTER_ID</span>/<span class="nv">$POOL</span>/<span class="nv">$IMAGE_ID</span>/snap
+</pre></div>
+<p>Of course, you might add other options, like <code>--private</code> or
+<code>--protected</code> or <code>--name</code>, but the above options are the bare minimum.</p>
+<h2>And that's it!</h2>
+<p>Now you can happily fire up VMs, or clone your image into a volume and
+fire a VM up from that.</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Part 2 of "Best Practices for Ceph and OpenStack"</h4>
+       <h5>Previous articles</h5>
+       <ul>
+           <li><a href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/dos-donts-ceph-openstack/index.html">The Dos and Don'ts for Ceph for OpenStack</a></li>
+       </ul>
+       <h5>Next articles</h5>
+       <ul>
+           <li><a href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/more-recommendations-ceph-openstack/index.html">More recommendations for Ceph and OpenStack</a></li>
+       </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="fghaas.github.io/xahteiwi.eu/images/avatar.jpg"/>
+        </p>
+</div><!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://twitter.com/xahteiwi"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+    <li class="list-group-item"><a href="https://www.linkedin.com/in/fghaas"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn</a></li>
+    <li class="list-group-item"><a href="https://reddit.com/u/fghaas"><i class="fa fa-reddit-square fa-lg"></i> Reddit</a></li>
+    <li class="list-group-item"><a href="https://github.com/fghaas"><i class="fa fa-github-square fa-lg"></i> GitHub</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="fghaas.github.io/xahteiwi.eu/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ansible.html">Ansible</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ceph.html">Ceph</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/cloudify.html">Cloudify</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/conference.html">Conference</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/containers.html">Containers</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/corosync.html">Corosync</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/development.html">Development</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/drbd.html">DRBD</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/flashcache.html">Flashcache</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/galera.html">Galera</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/glusterfs.html">GlusterFS</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/heat.html">Heat</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/high-availability.html">High Availability</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/juju.html">Juju</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/kvm.html">KVM</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/lca2014.html">lca2014</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/libvirt.html">libvirt</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/lxc.html">LXC</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/mysql.html">MySQL</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/open-edx.html">Open edX</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/openstack.html">OpenStack</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/oscon.html">OSCON</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/pacemaker.html">Pacemaker</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/performance.html">Performance</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/philosophy.html">Philosophy</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/suse.html">SUSE</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ubuntu.html">Ubuntu</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="/legal" target="_blank">Legal info</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container-fluid">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 Florian Haas
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">Creative Commons Attribution-ShareAlike 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>

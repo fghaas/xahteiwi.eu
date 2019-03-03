@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>A minimal Ubuntu OpenStack Juju configuration in just four nodes - xahteiwi.eu</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/ubuntu-openstack-juju-4-nodes/index.html">
+
+        <meta name="author" content="Florian Haas" />
+        <meta name="keywords" content="OpenStack,Juju" />
+        <meta name="description" content="Juju is Ubuntu&#39;s supported and preferred means of deployment automation for an OpenStack cloud. While in Juju, a deployment unit (a Juju charm) generally expects to fully own the filesystem it is being deployed on, Juju allows you to co-deploy charms on the same physical machines, by way of using …" />
+
+        <meta property="og:site_name" content="xahteiwi.eu" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="A minimal Ubuntu OpenStack Juju configuration in just four nodes"/>
+        <meta property="og:url" content="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/ubuntu-openstack-juju-4-nodes/index.html"/>
+        <meta property="og:description" content="Juju is Ubuntu&#39;s supported and preferred means of deployment automation for an OpenStack cloud. While in Juju, a deployment unit (a Juju charm) generally expects to fully own the filesystem it is being deployed on, Juju allows you to co-deploy charms on the same physical machines, by way of using …"/>
+        <meta property="article:published_time" content="2015-12-23" />
+            <meta property="article:section" content="hints-and-kinks" />
+            <meta property="article:tag" content="OpenStack" />
+            <meta property="article:tag" content="Juju" />
+            <meta property="article:author" content="Florian Haas" />
+
+    <meta name="twitter:dnt" content="on">
+    <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@xahteiwi">
+        <meta name="twitter:creator" content="@xahteiwi">
+    <meta name="twitter:domain" content="fghaas.github.io/xahteiwi.eu">
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="fghaas.github.io/xahteiwi.eu/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="fghaas.github.io/xahteiwi.eu/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="fghaas.github.io/xahteiwi.eu/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="fghaas.github.io/xahteiwi.eu/theme/css/style.css" type="text/css"/>
+
+        <link href="fghaas.github.io/xahteiwi.eu/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="xahteiwi.eu ATOM Feed"/>
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="fghaas.github.io/xahteiwi.eu/" class="navbar-brand">
+xahteiwi.eu            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/hints-and-kinks/">Hints and Kinks</a></li>
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/presentations/">Presentations</a></li>
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/blogs/">Blog</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/ubuntu-openstack-juju-4-nodes/index.html"
+                       rel="bookmark"
+                       title="Permalink to A minimal Ubuntu OpenStack Juju configuration in just four nodes">
+                        A minimal Ubuntu OpenStack Juju configuration in just four nodes
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-12-23T00:00:00+00:00"> Wed 23 December 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="fghaas.github.io/xahteiwi.eu/tag/openstack.html">OpenStack</a>
+        /
+	<a href="fghaas.github.io/xahteiwi.eu/tag/juju.html">Juju</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Juju is Ubuntu's supported and preferred means of deployment
+automation for an OpenStack cloud. While in Juju, a deployment unit (a
+<em>Juju charm</em>) generally expects to fully own the filesystem it is
+being deployed on, Juju allows you to co-deploy charms on the same
+physical machines, by way of using LXC containers.</p>
+<p>Now in general, Juju should allow you to deploy complex service
+<em>bundles</em> in one swoop, however this works best when deploying to the
+bare metal (i.e. without containers). Still, it is perfectly possible
+to automate Juju deployment of an entire OpenStack cloud in just 4
+physical nodes:</p>
+<ul>
+<li>A controller node (running your OpenStack APIs and your dashboard);</li>
+<li>a compute node (running VMs under libvirt/KVM management);</li>
+<li>a network gateway node (providing L3 network connectivity);</li>
+<li>a storage node (providing Cinder volumes via iSCSI and LVM).</li>
+</ul>
+<p>The assumption for the setup below is that you already have a Juju
+infrastructure in place. You may have set this up with MAAS, or you
+may have just bootstrapped a deployment node and then created a Juju
+<code>manual</code> environment and added your 4 nodes via SSH.</p>
+<p>Note that the environment described here should not be used for
+production purposes. However, the same approach is also applicable to
+a 3-node controller HA cluster, 2-node Neutron gateway cluster with
+support for HA routers, and as many converged Ceph/<code>nova-compute</code>
+nodes as you want.</p>
+<h2>Juju configuration</h2>
+<p>Consider the following Juju configuration YAML example, which you
+might put into your home directory as <code>juju-config.yaml</code>.</p>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">keystone</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">openstack-origin</span><span class="p p-Indicator">:</span> <span class="s">'cloud:trusty-liberty'</span>
+  <span class="l l-Scalar l-Scalar-Plain">admin-password</span><span class="p p-Indicator">:</span> <span class="s">'my</span><span class="nv"> </span><span class="s">very</span><span class="nv"> </span><span class="s">secret</span><span class="nv"> </span><span class="s">password'</span>
+<span class="l l-Scalar l-Scalar-Plain">nova-cloud-controller</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">openstack-origin</span><span class="p p-Indicator">:</span> <span class="s">'cloud:trusty-liberty'</span>
+  <span class="l l-Scalar l-Scalar-Plain">network-manager</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Neutron</span>
+<span class="l l-Scalar l-Scalar-Plain">neutron-gateway</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">openstack-origin</span><span class="p p-Indicator">:</span> <span class="s">'cloud:trusty-liberty'</span>
+  <span class="l l-Scalar l-Scalar-Plain">ext-port</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">eth2</span>
+  <span class="l l-Scalar l-Scalar-Plain">bridge-mappings</span><span class="p p-Indicator">:</span> <span class="s">'external:br-ex'</span>
+  <span class="l l-Scalar l-Scalar-Plain">os-data-network</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">192.168.133.0/24</span>
+  <span class="l l-Scalar l-Scalar-Plain">instance-mtu</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1400</span>
+<span class="l l-Scalar l-Scalar-Plain">neutron-api</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">openstack-origin</span><span class="p p-Indicator">:</span> <span class="s">'cloud:trusty-liberty'</span>
+  <span class="l l-Scalar l-Scalar-Plain">network-device-mtu</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1400</span>
+  <span class="c1"># Always make sure you enable security groups</span>
+  <span class="l l-Scalar l-Scalar-Plain">neutron-security-groups</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="l l-Scalar l-Scalar-Plain">overlay-network-type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">vxlan</span>
+<span class="l l-Scalar l-Scalar-Plain">rabbitmq-server</span><span class="p p-Indicator">:</span>
+<span class="c1"># Cinder is deployed in two parts: one for the API and scheduler</span>
+<span class="c1"># (which can live in a container), one for the volume service (which</span>
+<span class="c1"># cannot, at least not for the LVM/iSCSI backend)</span>
+<span class="l l-Scalar l-Scalar-Plain">cinder-api</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">openstack-origin</span><span class="p p-Indicator">:</span> <span class="s">'cloud:trusty-liberty'</span>
+  <span class="l l-Scalar l-Scalar-Plain">enabled-services</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">api,scheduler</span>
+<span class="l l-Scalar l-Scalar-Plain">cinder-volume</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">openstack-origin</span><span class="p p-Indicator">:</span> <span class="s">'cloud:trusty-liberty'</span>
+  <span class="l l-Scalar l-Scalar-Plain">enabled-services</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">volume</span>
+  <span class="c1"># Adjust this to match the block device on your volume host</span>
+  <span class="l l-Scalar l-Scalar-Plain">block-device</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">vdb</span>
+<span class="l l-Scalar l-Scalar-Plain">glance</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">openstack-origin</span><span class="p p-Indicator">:</span> <span class="s">'cloud:trusty-liberty'</span>
+<span class="l l-Scalar l-Scalar-Plain">heat</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">openstack-origin</span><span class="p p-Indicator">:</span> <span class="s">'cloud:trusty-liberty'</span>
+<span class="l l-Scalar l-Scalar-Plain">mysql</span><span class="p p-Indicator">:</span>
+<span class="l l-Scalar l-Scalar-Plain">openstack-dashboard</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">openstack-origin</span><span class="p p-Indicator">:</span> <span class="s">'cloud:trusty-liberty'</span>
+  <span class="l l-Scalar l-Scalar-Plain">webroot</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/</span>
+<span class="l l-Scalar l-Scalar-Plain">nova-compute</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">openstack-origin</span><span class="p p-Indicator">:</span> <span class="s">'cloud:trusty-liberty'</span>
+  <span class="l l-Scalar l-Scalar-Plain">manage-neutron-plugin-legacy-mode</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+  <span class="c1"># Change to qemu if in a nested cloud environment</span>
+  <span class="l l-Scalar l-Scalar-Plain">virt-type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">kvm</span>
+<span class="l l-Scalar l-Scalar-Plain">neutron-openvswitch</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">os-data-network</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">192.168.133.0/24</span>
+</pre></div>
+<h2>Deployment</h2>
+<p>Then, you can run the following shell script to deploy your control
+services to LXC containers on machine 1, <code>nova-compute</code> (and its
+subordinate charm, <code>neutron-openvswitch</code>) to machine 2,
+<code>neutron-gateway</code> to machine 3, and <code>cinder-volume</code> to machine 4.</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash -ex</span>
+
+<span class="nv">CONFIG</span><span class="o">=</span>~/juju-config.yaml
+
+juju deploy --config<span class="o">=</span><span class="nv">$CONFIG</span> mysql --to lxc:1
+juju deploy --config<span class="o">=</span><span class="nv">$CONFIG</span> rabbitmq-server --to lxc:1
+
+sleep 120s
+
+juju deploy --config<span class="o">=</span><span class="nv">$CONFIG</span> keystone --to lxc:1
+juju add-relation keystone:shared-db mysql:shared-db
+
+juju deploy --config<span class="o">=</span><span class="nv">$CONFIG</span> glance --to lxc:1
+juju add-relation glance:identity-service keystone:identity-service
+juju add-relation glance:shared-db mysql:shared-db
+
+juju deploy --config<span class="o">=</span><span class="nv">$CONFIG</span> neutron-api --to lxc:1
+juju add-relation neutron-api:amqp rabbitmq-server:amqp
+juju add-relation neutron-api:identity-service keystone:identity-service
+juju add-relation neutron-api:shared-db mysql:shared-db
+
+juju deploy --config<span class="o">=</span><span class="nv">$CONFIG</span> neutron-gateway --to <span class="m">3</span>
+juju add-relation neutron-gateway:amqp rabbitmq-server:amqp
+juju add-relation neutron-gateway:neutron-plugin-api neutron-api:neutron-plugin-api
+juju add-relation neutron-gateway:shared-db mysql:shared-db
+
+juju deploy --config<span class="o">=</span><span class="nv">$CONFIG</span> nova-cloud-controller --to lxc:1
+juju add-relation nova-cloud-controller:amqp rabbitmq-server:amqp
+juju add-relation nova-cloud-controller:identity-service keystone:identity-service
+juju add-relation nova-cloud-controller:image-service glance:image-service
+juju add-relation nova-cloud-controller:neutron-api neutron-api:neutron-api
+juju add-relation nova-cloud-controller:shared-db mysql:shared-db
+
+juju deploy --config<span class="o">=</span><span class="nv">$CONFIG</span> nova-compute --to <span class="m">2</span>
+juju add-relation nova-compute:amqp rabbitmq-server:amqp
+juju add-relation nova-compute:cloud-compute nova-cloud-controller:cloud-compute
+juju add-relation nova-compute:image-service glance:image-service
+juju add-relation nova-compute:shared-db mysql:shared-db
+
+juju deploy --config<span class="o">=</span><span class="nv">$CONFIG</span> neutron-openvswitch
+juju add-relation neutron-openvswitch:amqp rabbitmq-server:amqp
+juju add-relation neutron-openvswitch:neutron-plugin-api neutron-api:neutron-plugin-api
+juju add-relation neutron-openvswitch:neutron-plugin nova-compute:neutron-plugin 
+juju deploy --config<span class="o">=</span><span class="nv">$CONFIG</span> cinder cinder-api --to lxc:1
+juju add-relation cinder-api:amqp rabbitmq-server:amqp
+juju add-relation cinder-api:cinder-volume-service nova-cloud-controller:cinder-volume-service
+juju add-relation cinder-api:identity-service keystone:identity-service
+juju add-relation cinder-api:image-service glance:image-service
+juju add-relation cinder-api:shared-db mysql:shared-db
+
+juju deploy --config<span class="o">=</span><span class="nv">$CONFIG</span> cinder cinder-volume --to <span class="m">4</span>
+juju add-relation cinder-volume:amqp rabbitmq-server:amqp
+juju add-relation cinder-volume:shared-db mysql:shared-db
+juju add-relation cinder-volume:image-service glance:image-service
+
+juju deploy --config<span class="o">=</span><span class="nv">$CONFIG</span> openstack-dashboard --to <span class="m">1</span>
+juju add-relation openstack-dashboard:identity-service keystone:identity-service
+
+juju deploy --config<span class="o">=</span><span class="nv">$CONFIG</span> heat --to lxc:1
+juju add-relation heat:amqp rabbitmq-server:amqp
+juju add-relation heat:identity-service keystone:identity-service
+juju add-relation heat:shared-db mysql:shared-db
+</pre></div>
+<p>And you're done! The whole process should give you an OpenStack cloud
+in about 20-30 minutes.</p>
+<p>By the way, an exceedingly useful command to watch the installation progress of your Juju environment is:</p>
+<div class="highlight"><pre><span></span>watch "juju stat --format=tabular"
+</pre></div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="fghaas.github.io/xahteiwi.eu/images/avatar.jpg"/>
+        </p>
+</div><!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://twitter.com/xahteiwi"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+    <li class="list-group-item"><a href="https://www.linkedin.com/in/fghaas"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn</a></li>
+    <li class="list-group-item"><a href="https://reddit.com/u/fghaas"><i class="fa fa-reddit-square fa-lg"></i> Reddit</a></li>
+    <li class="list-group-item"><a href="https://github.com/fghaas"><i class="fa fa-github-square fa-lg"></i> GitHub</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="fghaas.github.io/xahteiwi.eu/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ansible.html">Ansible</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ceph.html">Ceph</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/cloudify.html">Cloudify</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/conference.html">Conference</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/containers.html">Containers</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/corosync.html">Corosync</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/development.html">Development</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/drbd.html">DRBD</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/flashcache.html">Flashcache</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/galera.html">Galera</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/glusterfs.html">GlusterFS</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/heat.html">Heat</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/high-availability.html">High Availability</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/juju.html">Juju</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/kvm.html">KVM</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/lca2014.html">lca2014</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/libvirt.html">libvirt</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/lxc.html">LXC</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/mysql.html">MySQL</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/open-edx.html">Open edX</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/openstack.html">OpenStack</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/oscon.html">OSCON</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/pacemaker.html">Pacemaker</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/performance.html">Performance</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/philosophy.html">Philosophy</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/suse.html">SUSE</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ubuntu.html">Ubuntu</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="/legal" target="_blank">Legal info</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container-fluid">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 Florian Haas
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">Creative Commons Attribution-ShareAlike 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>

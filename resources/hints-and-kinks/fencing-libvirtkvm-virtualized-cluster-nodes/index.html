@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Fencing in Libvirt/KVM virtualized cluster nodes - xahteiwi.eu</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/fencing-libvirtkvm-virtualized-cluster-nodes/index.html">
+
+        <meta name="author" content="Florian Haas" />
+        <meta name="keywords" content="Pacemaker" />
+        <meta name="description" content="Often, people deploy the Pacemaker stack in virtual environments for purposes of testing and evaluation. In such environments, it&#39;s easy to test Pacemaker&#39;s fencing capabilities by tying in with the hypervisor. This quick howto illustrates how to configure fencing for two virtual cluster nodes hosted on a libvirt/KVM hypervisor …" />
+
+        <meta property="og:site_name" content="xahteiwi.eu" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Fencing in Libvirt/KVM virtualized cluster nodes"/>
+        <meta property="og:url" content="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/fencing-libvirtkvm-virtualized-cluster-nodes/index.html"/>
+        <meta property="og:description" content="Often, people deploy the Pacemaker stack in virtual environments for purposes of testing and evaluation. In such environments, it&#39;s easy to test Pacemaker&#39;s fencing capabilities by tying in with the hypervisor. This quick howto illustrates how to configure fencing for two virtual cluster nodes hosted on a libvirt/KVM hypervisor …"/>
+        <meta property="article:published_time" content="2012-02-29" />
+            <meta property="article:section" content="hints-and-kinks" />
+            <meta property="article:tag" content="Pacemaker" />
+            <meta property="article:author" content="Florian Haas" />
+
+    <meta name="twitter:dnt" content="on">
+    <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@xahteiwi">
+        <meta name="twitter:creator" content="@xahteiwi">
+    <meta name="twitter:domain" content="fghaas.github.io/xahteiwi.eu">
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="fghaas.github.io/xahteiwi.eu/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="fghaas.github.io/xahteiwi.eu/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="fghaas.github.io/xahteiwi.eu/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="fghaas.github.io/xahteiwi.eu/theme/css/style.css" type="text/css"/>
+
+        <link href="fghaas.github.io/xahteiwi.eu/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="xahteiwi.eu ATOM Feed"/>
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="fghaas.github.io/xahteiwi.eu/" class="navbar-brand">
+xahteiwi.eu            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/hints-and-kinks/">Hints and Kinks</a></li>
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/presentations/">Presentations</a></li>
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/blogs/">Blog</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/fencing-libvirtkvm-virtualized-cluster-nodes/index.html"
+                       rel="bookmark"
+                       title="Permalink to Fencing in Libvirt/KVM virtualized cluster nodes">
+                        Fencing in Libvirt/KVM virtualized cluster nodes
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2012-02-29T13:56:42+01:00"> Wed 29 February 2012</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="fghaas.github.io/xahteiwi.eu/tag/pacemaker.html">Pacemaker</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Often, people deploy the Pacemaker stack in virtual environments for
+purposes of testing and evaluation. In such environments, it's easy to
+test Pacemaker's fencing capabilities by tying in with the hypervisor.</p>
+<p>This quick howto illustrates how to configure fencing for two virtual
+cluster nodes hosted on a libvirt/KVM hypervisor host.</p>
+<h2>libvirt configuration (hypervisor)</h2>
+<p>In order to do libvirt fencing, your hypervisor should have its
+libvirtd daemon listen on a network socket. libvirtd is capable of
+doing this, both on an encrypted TLS socket, and on a regular,
+unencrypted TCP port. Needless to say, for production use you should
+only use TLS, but for testing and evaluation – and for that purpose
+only – TCP is fine.</p>
+<p>In order for your hypervisor to listen on an unauthenticated,
+insecure, unencrypted network socket (did we mention that's unsuitable
+for production?), add the following lines to your libvirtd
+configuration file:</p>
+<div class="highlight"><pre><span></span><span class="na">listen_tls</span> <span class="o">=</span> <span class="s">0</span>
+<span class="na">listen_tcp</span> <span class="o">=</span> <span class="s">1</span>
+<span class="na">tcp_port</span> <span class="o">=</span> <span class="s">"16509"</span>
+<span class="na">auth_tcp</span> <span class="o">=</span> <span class="s">"none"</span>
+</pre></div>
+<p>You can also set the <code>listen_addr</code> parameter, for example to have
+libvirtd listen only on the network that your virtual machines run
+in. If you don't set listen_addr, libvirtd will simply listen on the
+wildcard address.</p>
+<p>You'll also have to add the <code>-l</code> or <code>--listen</code> flag to your libvirtd
+invocation. On Debian/Ubuntu platforms, you can do so by editing the
+<code>/etc/default/libvirt-bin</code> configuration file.</p>
+<p>Once you've done that, you can use <code>netstat -ltp</code> to check whether
+libvirtd is in fact listening on its configured port, 16509/tcp. Also,
+make sure that you don't have a firewall blocking that port.</p>
+<h2>libvirt configuration (virtual machines)</h2>
+<p>Inside your virtual machines, you'll also have to install the libvirt
+client binaries – the fencing mechanism uses the virsh utility under
+the covers. Some platforms provide a <code>libvirt-client</code> package for that
+purpose; for other's, you'll simply have to install the full <code>libvirt</code>
+package.</p>
+<p>Once that is set up, you should be able to run this command from
+inside your virtual machines:</p>
+<div class="highlight"><pre><span></span>virsh --connect<span class="o">=</span>qemu+tcp://&lt;IP of your hypervisor&gt;/system <span class="se">\</span>
+  list --all
+</pre></div>
+<p>... and that command should list all the domains running on that host,
+including the one you're connecting from.</p>
+<h2>Pacemaker configuration</h2>
+<p>In one of your virtual machines, you can now set up your fencing
+configuration.</p>
+<p>This example assumes that you have two nodes named alice and bob, that
+their corresponding virtual machine domain names are also alice and
+bob, and that they can reach their hypervisor by TCP at 192.168.0.1:</p>
+<div class="highlight"><pre><span></span>primitive p_fence_alice stonith:external/libvirt \
+  params hostlist="alice" \
+   hypervisor_uri="qemu+tcp://192.168.0.1/system" \
+  op monitor interval="60"
+primitive p_fence_bob stonith:external/libvirt \
+  params hostlist="bob" \
+    hypervisor_uri="qemu+tcp://192.168.0.1/system" \
+  op monitor interval="60"
+location l_fence_alice p_fence_alice -inf: alice
+location l_fence_bob p_fence_bob -inf: bob
+property stonith-enabled=true
+</pre></div>
+<p>Now you can test fencing to the best of your abilities.</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="fghaas.github.io/xahteiwi.eu/images/avatar.jpg"/>
+        </p>
+</div><!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://twitter.com/xahteiwi"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+    <li class="list-group-item"><a href="https://www.linkedin.com/in/fghaas"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn</a></li>
+    <li class="list-group-item"><a href="https://reddit.com/u/fghaas"><i class="fa fa-reddit-square fa-lg"></i> Reddit</a></li>
+    <li class="list-group-item"><a href="https://github.com/fghaas"><i class="fa fa-github-square fa-lg"></i> GitHub</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="fghaas.github.io/xahteiwi.eu/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ansible.html">Ansible</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ceph.html">Ceph</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/cloudify.html">Cloudify</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/conference.html">Conference</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/containers.html">Containers</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/corosync.html">Corosync</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/development.html">Development</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/drbd.html">DRBD</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/flashcache.html">Flashcache</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/galera.html">Galera</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/glusterfs.html">GlusterFS</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/heat.html">Heat</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/high-availability.html">High Availability</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/juju.html">Juju</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/kvm.html">KVM</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/lca2014.html">lca2014</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/libvirt.html">libvirt</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/lxc.html">LXC</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/mysql.html">MySQL</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/open-edx.html">Open edX</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/openstack.html">OpenStack</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/oscon.html">OSCON</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/pacemaker.html">Pacemaker</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/performance.html">Performance</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/philosophy.html">Philosophy</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/suse.html">SUSE</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ubuntu.html">Ubuntu</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="/legal" target="_blank">Legal info</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container-fluid">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 Florian Haas
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">Creative Commons Attribution-ShareAlike 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>

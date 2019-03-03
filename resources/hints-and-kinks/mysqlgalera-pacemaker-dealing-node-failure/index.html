@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Dealing with node failure - xahteiwi.eu</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-dealing-node-failure/index.html">
+
+        <meta name="author" content="Florian Haas" />
+        <meta name="keywords" content="Galera,MySQL,Pacemaker" />
+        <meta name="description" content="If an entire node happens to get killed, and that node currently does not hold the Galera IP (192.168.122.99 in our example), then the other nodes simply continue to function normally, and you can connect to and use them without interruption. In the example below, alice has …" />
+
+        <meta property="og:site_name" content="xahteiwi.eu" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Dealing with node failure"/>
+        <meta property="og:url" content="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-dealing-node-failure/index.html"/>
+        <meta property="og:description" content="If an entire node happens to get killed, and that node currently does not hold the Galera IP (192.168.122.99 in our example), then the other nodes simply continue to function normally, and you can connect to and use them without interruption. In the example below, alice has …"/>
+        <meta property="article:published_time" content="2012-12-04" />
+            <meta property="article:section" content="hints-and-kinks" />
+            <meta property="article:tag" content="Galera" />
+            <meta property="article:tag" content="MySQL" />
+            <meta property="article:tag" content="Pacemaker" />
+            <meta property="article:author" content="Florian Haas" />
+
+    <meta name="twitter:dnt" content="on">
+    <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@xahteiwi">
+        <meta name="twitter:creator" content="@xahteiwi">
+    <meta name="twitter:domain" content="fghaas.github.io/xahteiwi.eu">
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="fghaas.github.io/xahteiwi.eu/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="fghaas.github.io/xahteiwi.eu/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="fghaas.github.io/xahteiwi.eu/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="fghaas.github.io/xahteiwi.eu/theme/css/style.css" type="text/css"/>
+
+        <link href="fghaas.github.io/xahteiwi.eu/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="xahteiwi.eu ATOM Feed"/>
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="fghaas.github.io/xahteiwi.eu/" class="navbar-brand">
+xahteiwi.eu            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/hints-and-kinks/">Hints and Kinks</a></li>
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/presentations/">Presentations</a></li>
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/blogs/">Blog</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-dealing-node-failure/index.html"
+                       rel="bookmark"
+                       title="Permalink to Dealing with node failure">
+                        Dealing with node failure
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2012-12-04T10:53:27+01:00"> Tue 04 December 2012</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="fghaas.github.io/xahteiwi.eu/tag/galera.html">Galera</a>
+        /
+	<a href="fghaas.github.io/xahteiwi.eu/tag/mysql.html">MySQL</a>
+        /
+	<a href="fghaas.github.io/xahteiwi.eu/tag/pacemaker.html">Pacemaker</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>If an entire node happens to get killed, and that node currently does
+not hold the Galera IP (192.168.122.99 in our example), then the other
+nodes simply continue to function normally, and you can connect to and
+use them without interruption. In the example below, <code>alice</code> has left
+the cluster:</p>
+<div class="highlight"><pre><span></span><span class="o">============</span>
+<span class="n">Last</span> <span class="nl">updated</span><span class="p">:</span> <span class="n">Mon</span> <span class="n">Dec</span>  <span class="mi">3</span> <span class="mi">22</span><span class="o">:</span><span class="mi">24</span><span class="o">:</span><span class="mi">55</span> <span class="mi">2012</span>
+<span class="n">Last</span> <span class="nl">change</span><span class="p">:</span> <span class="n">Mon</span> <span class="n">Dec</span>  <span class="mi">3</span> <span class="mi">22</span><span class="o">:</span><span class="mi">23</span><span class="o">:</span><span class="mi">19</span> <span class="mi">2012</span> <span class="n">via</span> <span class="n">crmd</span> <span class="n">on</span> <span class="n">charlie</span>
+<span class="nl">Stack</span><span class="p">:</span> <span class="n">openais</span>
+<span class="n">Current</span> <span class="nl">DC</span><span class="p">:</span> <span class="n">charlie</span> <span class="o">-</span> <span class="n">partition</span> <span class="n">with</span> <span class="n">quorum</span>
+<span class="nl">Version</span><span class="p">:</span> <span class="mf">1.1.7</span><span class="o">-</span><span class="n">ee0730e13d124c3d58f00016c3376a1de5323cff</span>
+<span class="mi">3</span> <span class="n">Nodes</span> <span class="n">configured</span><span class="p">,</span> <span class="mi">3</span> <span class="n">expected</span> <span class="n">votes</span>
+<span class="mi">4</span> <span class="n">Resources</span> <span class="n">configured</span><span class="p">.</span>
+<span class="o">============</span>
+
+<span class="nl">Online</span><span class="p">:</span> <span class="p">[</span> <span class="n">bob</span> <span class="n">charlie</span> <span class="p">]</span>
+<span class="nl">OFFLINE</span><span class="p">:</span> <span class="p">[</span> <span class="n">alice</span> <span class="p">]</span>
+
+<span class="n">Full</span> <span class="n">list</span> <span class="n">of</span> <span class="nl">resources</span><span class="p">:</span>
+
+<span class="n">p_ip_mysql_galera</span>       <span class="p">(</span><span class="n">ocf</span><span class="o">::</span><span class="nl">heartbeat</span><span class="p">:</span><span class="n">IPaddr2</span><span class="p">)</span><span class="o">:</span>       <span class="n">Started</span> <span class="n">bob</span>
+ <span class="n">Clone</span> <span class="nl">Set</span><span class="p">:</span> <span class="n">cl_mysql</span> <span class="p">[</span><span class="n">p_mysql</span><span class="p">]</span>
+     <span class="nl">Started</span><span class="p">:</span> <span class="p">[</span> <span class="n">bob</span> <span class="n">charlie</span> <span class="p">]</span>
+     <span class="nl">Stopped</span><span class="p">:</span> <span class="p">[</span> <span class="nl">p_mysql</span><span class="p">:</span><span class="mi">0</span> <span class="p">]</span>
+</pre></div>
+<p>If the node dies that does currently hold the Galera IP
+(192.168.122.99 in our example), then the cluster IP shifts to a
+different node, and when the failed node returns, it can re-fetch the
+cluster state from the node that took over the IP address. In the
+example below, in a healthy cluster the IP happens to be running on
+<code>bob</code>:</p>
+<div class="highlight"><pre><span></span>============
+Last updated: Mon Dec  3 22:32:35 2012
+Last change: Mon Dec  3 22:23:19 2012 via crmd on charlie
+Stack: openais
+Current DC: charlie - partition with quorum
+Version: 1.1.7-ee0730e13d124c3d58f00016c3376a1de5323cff
+3 Nodes configured, 3 expected votes
+4 Resources configured.
+============
+
+Online: [ bob alice charlie ]
+
+Full list of resources:
+
+p_ip_mysql_galera       (ocf::heartbeat:IPaddr2):       Started bob
+ Clone Set: cl_mysql [p_mysql]
+     Started: [ alice bob charlie ]
+</pre></div>
+<p>Subsequently, <code>bob</code> is affected by a failure, and the IP address
+shifts to <code>alice</code>:</p>
+<div class="highlight"><pre><span></span><span class="o">============</span>
+<span class="n">Last</span> <span class="nl">updated</span><span class="p">:</span> <span class="n">Mon</span> <span class="n">Dec</span>  <span class="mi">3</span> <span class="mi">22</span><span class="o">:</span><span class="mi">33</span><span class="o">:</span><span class="mi">33</span> <span class="mi">2012</span>
+<span class="n">Last</span> <span class="nl">change</span><span class="p">:</span> <span class="n">Mon</span> <span class="n">Dec</span>  <span class="mi">3</span> <span class="mi">22</span><span class="o">:</span><span class="mi">23</span><span class="o">:</span><span class="mi">19</span> <span class="mi">2012</span> <span class="n">via</span> <span class="n">crmd</span> <span class="n">on</span> <span class="n">charlie</span>
+<span class="nl">Stack</span><span class="p">:</span> <span class="n">openais</span>
+<span class="n">Current</span> <span class="nl">DC</span><span class="p">:</span> <span class="n">charlie</span> <span class="o">-</span> <span class="n">partition</span> <span class="n">with</span> <span class="n">quorum</span>
+<span class="nl">Version</span><span class="p">:</span> <span class="mf">1.1.7</span><span class="o">-</span><span class="n">ee0730e13d124c3d58f00016c3376a1de5323cff</span>
+<span class="mi">3</span> <span class="n">Nodes</span> <span class="n">configured</span><span class="p">,</span> <span class="mi">3</span> <span class="n">expected</span> <span class="n">votes</span>
+<span class="mi">4</span> <span class="n">Resources</span> <span class="n">configured</span><span class="p">.</span>
+<span class="o">============</span>
+
+<span class="nl">Online</span><span class="p">:</span> <span class="p">[</span> <span class="n">alice</span> <span class="n">charlie</span> <span class="p">]</span>
+<span class="nl">OFFLINE</span><span class="p">:</span> <span class="p">[</span> <span class="n">bob</span> <span class="p">]</span>
+
+<span class="n">Full</span> <span class="n">list</span> <span class="n">of</span> <span class="nl">resources</span><span class="p">:</span>
+
+<span class="n">p_ip_mysql_galera</span>       <span class="p">(</span><span class="n">ocf</span><span class="o">::</span><span class="nl">heartbeat</span><span class="p">:</span><span class="n">IPaddr2</span><span class="p">)</span><span class="o">:</span>       <span class="n">Started</span> <span class="n">alice</span>
+ <span class="n">Clone</span> <span class="nl">Set</span><span class="p">:</span> <span class="n">cl_mysql</span> <span class="p">[</span><span class="n">p_mysql</span><span class="p">]</span>
+     <span class="nl">Started</span><span class="p">:</span> <span class="p">[</span> <span class="n">alice</span> <span class="n">charlie</span> <span class="p">]</span>
+     <span class="nl">Stopped</span><span class="p">:</span> <span class="p">[</span> <span class="nl">p_mysql</span><span class="p">:</span><span class="mi">1</span> <span class="p">]</span>
+</pre></div>
+<p>When <code>bob</code> returns, it simply connects to <code>alice</code> (which now hosts the
+cluster IP), fetches the database state from there, and continues to
+run:</p>
+<div class="highlight"><pre><span></span>============
+Last updated: Mon Dec  3 22:35:46 2012
+Last change: Mon Dec  3 22:23:19 2012 via crmd on charlie
+Stack: openais
+Current DC: charlie - partition with quorum
+Version: 1.1.7-ee0730e13d124c3d58f00016c3376a1de5323cff
+3 Nodes configured, 3 expected votes
+4 Resources configured.
+============
+
+Online: [ bob alice charlie ]
+
+Full list of resources:
+
+p_ip_mysql_galera       (ocf::heartbeat:IPaddr2):       Started alice
+ Clone Set: cl_mysql [p_mysql]
+     Started: [ alice bob charlie ]
+</pre></div>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Part 8 of "MySQL/Galera in Pacemaker High Availability Clusters"</h4>
+       <h5>Previous articles</h5>
+       <ul>
+           <li><a href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-high-availability-clusters/index.html">MySQL/Galera in Pacemaker High Availability Clusters</a></li>
+           <li><a href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-configuring-corosync/index.html">Configuring Corosync</a></li>
+           <li><a href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-starting-pacemaker/index.html">Starting Pacemaker</a></li>
+           <li><a href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-setting-galera-specific-mysql-options/index.html">Setting Galera-specific MySQL options</a></li>
+           <li><a href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-bootstrapping-galera-cluster/index.html">Bootstrapping the Galera cluster</a></li>
+           <li><a href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-adding-mysqlgalera-resources-pacemaker/index.html">Adding MySQL/Galera resources to Pacemaker</a></li>
+           <li><a href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-testing-resource-recovery/index.html">Testing resource recovery</a></li>
+       </ul>
+       <h5>Next articles</h5>
+       <ul>
+           <li><a href="fghaas.github.io/xahteiwi.eu/resources/hints-and-kinks/mysqlgalera-pacemaker-recovering-full-cluster-shutdown/index.html">Recovering from full cluster shutdown</a></li>
+       </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="fghaas.github.io/xahteiwi.eu/images/avatar.jpg"/>
+        </p>
+</div><!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://twitter.com/xahteiwi"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+    <li class="list-group-item"><a href="https://www.linkedin.com/in/fghaas"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn</a></li>
+    <li class="list-group-item"><a href="https://reddit.com/u/fghaas"><i class="fa fa-reddit-square fa-lg"></i> Reddit</a></li>
+    <li class="list-group-item"><a href="https://github.com/fghaas"><i class="fa fa-github-square fa-lg"></i> GitHub</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="fghaas.github.io/xahteiwi.eu/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ansible.html">Ansible</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ceph.html">Ceph</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/cloudify.html">Cloudify</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/conference.html">Conference</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/containers.html">Containers</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/corosync.html">Corosync</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/development.html">Development</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/drbd.html">DRBD</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/flashcache.html">Flashcache</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/galera.html">Galera</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/glusterfs.html">GlusterFS</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/heat.html">Heat</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/high-availability.html">High Availability</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/juju.html">Juju</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/kvm.html">KVM</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/lca2014.html">lca2014</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/libvirt.html">libvirt</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/lxc.html">LXC</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/mysql.html">MySQL</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/open-edx.html">Open edX</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/openstack.html">OpenStack</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/oscon.html">OSCON</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/pacemaker.html">Pacemaker</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/performance.html">Performance</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/philosophy.html">Philosophy</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/suse.html">SUSE</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ubuntu.html">Ubuntu</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="/legal" target="_blank">Legal info</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container-fluid">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 Florian Haas
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">Creative Commons Attribution-ShareAlike 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>

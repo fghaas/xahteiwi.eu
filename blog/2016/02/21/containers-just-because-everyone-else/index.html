@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Containers: Just Because Everyone Else is Doing Them Wrong, Doesn't Mean You Have To - xahteiwi.eu</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="fghaas.github.io/xahteiwi.eu/blog/2016/02/21/containers-just-because-everyone-else/index.html">
+
+        <meta name="author" content="florian" />
+        <meta name="keywords" content="LXC,Containers,Ubuntu,Ansible" />
+        <meta name="description" content="The recent CVE-2015-7547 vulnerability in glibc exposed a common antipattern in container management. Here&#39;s what you can do to avoid it, and instead adopt a container management pattern that will preserve your sanity and enable you to react to critical issues in minutes." />
+
+        <meta property="og:site_name" content="xahteiwi.eu" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Containers: Just Because Everyone Else is Doing Them Wrong, Doesn&#39;t Mean You Have To"/>
+        <meta property="og:url" content="fghaas.github.io/xahteiwi.eu/blog/2016/02/21/containers-just-because-everyone-else/index.html"/>
+        <meta property="og:description" content="The recent CVE-2015-7547 vulnerability in glibc exposed a common antipattern in container management. Here&#39;s what you can do to avoid it, and instead adopt a container management pattern that will preserve your sanity and enable you to react to critical issues in minutes."/>
+        <meta property="article:published_time" content="2016-02-21" />
+            <meta property="article:section" content="blogs" />
+            <meta property="article:tag" content="LXC" />
+            <meta property="article:tag" content="Containers" />
+            <meta property="article:tag" content="Ubuntu" />
+            <meta property="article:tag" content="Ansible" />
+            <meta property="article:author" content="florian" />
+            <meta property="og:image"
+                  content="fghaas.github.io/xahteiwi.eu/images/lxc-logo.png"/>
+
+    <meta name="twitter:dnt" content="on">
+    <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@xahteiwi">
+        <meta name="twitter:creator" content="@xahteiwi">
+    <meta name="twitter:domain" content="fghaas.github.io/xahteiwi.eu">
+            <meta property="twitter:image"
+                  content="fghaas.github.io/xahteiwi.eu/images/lxc-logo.png"/>
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="fghaas.github.io/xahteiwi.eu/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="fghaas.github.io/xahteiwi.eu/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="fghaas.github.io/xahteiwi.eu/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="fghaas.github.io/xahteiwi.eu/theme/css/style.css" type="text/css"/>
+
+        <link href="fghaas.github.io/xahteiwi.eu/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="xahteiwi.eu ATOM Feed"/>
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="fghaas.github.io/xahteiwi.eu/" class="navbar-brand">
+xahteiwi.eu            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/hints-and-kinks/">Hints and Kinks</a></li>
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/presentations/">Presentations</a></li>
+                    <li><a href="fghaas.github.io/xahteiwi.eu/category/blogs/">Blog</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="fghaas.github.io/xahteiwi.eu/blog/2016/02/21/containers-just-because-everyone-else/index.html"
+                       rel="bookmark"
+                       title="Permalink to Containers: Just Because Everyone Else is Doing Them Wrong, Doesn't Mean You Have To">
+                        Containers: Just Because Everyone Else is Doing Them Wrong, Doesn't Mean You Have To
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2016-02-21T00:00:00+00:00"> Sun 21 February 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="fghaas.github.io/xahteiwi.eu/tag/lxc.html">LXC</a>
+        /
+	<a href="fghaas.github.io/xahteiwi.eu/tag/containers.html">Containers</a>
+        /
+	<a href="fghaas.github.io/xahteiwi.eu/tag/ubuntu.html">Ubuntu</a>
+        /
+	<a href="fghaas.github.io/xahteiwi.eu/tag/ansible.html">Ansible</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>This is a writeup of <a href="http://sched.co/3xVu">a presentation</a> I did at
+LinuxCon Europe in Dublin last year. Since Linux Foundation Events
+<em>still</em> don't come with video recording for all talks (all they do
+record and publish are keynotes), I can't point you to a YouTube link,
+though you're certainly welcome to
+<a href="fghaas.github.io/xahteiwi.eu/resources/presentations/manageable-application-containers/index.html">peruse my slides</a>
+from that talk.</p>
+<h2>The problem</h2>
+<p>Suppose you're an operator who, in a massively scaled-out and highly
+automated deployment, is responsible for keeping a few hundred or a
+few thousand containers up and running. Your developers put those
+together and then basically throw them over the wall for you to
+manage. It's your job just to keep them alive, available, and secure;
+what's <em>in</em> them is your developers' domain. Sure, you have Git repos
+you build your containers from, and a Docker registry, so you can
+always check what's in which container. You don't get to call the
+shots, though.</p>
+<p>Suppose further that all most of your containers run some form of web
+service. And let's assume, just for the sake of this discussion, that
+they're all running Apache, because that's your reference
+platform. Your developers may be writing applications in Python or
+Ruby or (shudder) PHP, but what all your apps have in common is that
+you've settled on Apache as your reference platform. Your developers
+can assume that with Apache, you, the ops person, know the boldface
+cold, and you can give them an extremely stable, well-tuned platform
+to build on.</p>
+<p>And then Apache is affected by some disturbing security vulnerability
+that you must now fix in record time. Say, something affecting your
+core SSL library or maybe even your C library. Sound familiar? Thought
+so.</p>
+<h3>The fix in a non-containerized world</h3>
+<p>OK, so you must now fix OpenSSL or libc on all your systems in record
+time before the anticipated exploit barrage rolls in. In a world
+without containers, you'd rely on your trusted software source
+(normally, your distro vendor) to provide you with a fixed package or
+packages for the affected libraries. You would then roll those out via
+your preferred software management utility, or system automation
+facility, or unattended upgrade scheme.</p>
+<p>In short, you'd have a tense time until updated packages are
+available, but once they are, things get fixed in a matter of minutes.</p>
+<h3>But what now?</h3>
+<p>With the deployment of containers comes, frequently, the notion that
+packaging, package management, or dependency tracking is somehow a
+terrible idea. Instead, you put everything you need into one container
+image, deploy one container per service, and not worry about what a
+<em>different</em> service running on the same physical hardware might need.</p>
+<p>At first glance, that simplifies things. Your developer needs MySQL
+configured a certain way, and some other app needs it differently?
+Fine, they can put everything in their own separate containers,
+binaries, libraries and all, problem solved. Storage is dirt cheap,
+containers are efficient and produce little overhead. If they ever
+need to change anything, say go from one MySQL point release to
+another, then they just rebuild the container, you replace the old
+build with the new one, fine.</p>
+<p>But now it's not your developer who wants to change things, it's <em>you</em>
+who needs to deploy a critical fix.<sup id="fnref:twitter"><a class="footnote-ref" href="#fn:twitter" rel="footnote">1</a></sup></p>
+<blockquote class="twitter-tweet" data-lang="en"><p dir="ltr" lang="en">so.. using GlibC? <br/><br/>How’s re-imaging all of your <a href="https://twitter.com/docker">@Docker</a> images going?</p>—
+Josh Long (龙之春) (@starbuxman) <a href="https://twitter.com/starbuxman/status/700591322177019904">February
+19, 2016</a></blockquote>
+<p>So you set out to rebuild a few hundred containers, or maybe a couple
+of thousand, to get the issue fixed. In a perfect environment, you
+have access to every build chain, know about every version of every
+container in your area of responsibility, can pinpoint exactly which
+are affected by the vulnerability, have an automated toolchain to
+build and deploy them, have perfect documentation so you don't need to
+check back with any of your developers, so it doesn't matter whether
+any one is out sick, on vacation, or has left the company since they
+deployed one of their, now potentially affected, services.</p>
+<p>And of course, everyone works in such a perfect environment. Right?</p>
+<p>So now, even <em>after</em> a fix to your issue is already available, you
+<em>still</em> need to scramble to get it deployed, and deploying is <em>a lot</em>
+more complicated than in a world without containers.</p>
+<h2>Is this an inherent problem with containers?</h2>
+<p>Of course not. The problem isn't with the fact that you're using
+containers, or with the specific container technology. <strong>The problem
+is that everyone is telling you to use containers a certain way, and
+from an operational perspective that way is wrong.</strong> And it's not even
+"wrong but still better than all other options", it's just wrong. I
+guess you could call it the Docker Fallacy.</p>
+<p>That's the bad news. The good news is that there is a way that is
+better, saner, and cleaner, and will make your life as an operator
+<em>much</em> easier, while not being too hard on your developer friends.</p>
+<h2>So what's a better way?</h2>
+<p>You can use containers in a simpler, less flashy, less exciting
+— in short, <em>better</em> way.</p>
+<h3>Define a core platform, or platforms</h3>
+<p>Any organization worth its salt will select a handful of distributions
+to build products and services on. Maybe it's even just one, but let's
+assume you have several, say the latest Ubuntu LTS,<sup id="fnref:ubuntu"><a class="footnote-ref" href="#fn:ubuntu" rel="footnote">2</a></sup> the
+latest CentOS, and the latest Debian. For each of these, you can
+define an absolute bare-minimal list of packages. I can almost
+guarantee you that none of your developers will care about a single
+item on that list. A C library, a shell, an init system, coreutils,
+NTP... chances are that you'll run up a list of well over 100 core
+system components that <em>you</em> will be expected to keep secure; your
+developers will take them all for granted.</p>
+<p>What <em>you</em> can take for granted, thanks to the tireless work of
+packagers and distro vendors over years and years, is that you will
+get timely security updates for all of those.</p>
+<h3>Deploy your core platforms as often as you need</h3>
+<p>Deploy these reference systems across your physical hardware. Deploy
+as many as you need for all the containers you're expected to run on
+each platform. Do so in an automated fashion, so that you never have
+to log into any of these systems by hand.</p>
+<h3>Use OverlayFS for your containers</h3>
+<p><a href="https://en.wikipedia.org/wiki/OverlayFS">OverlayFS</a> is a union mount
+filesystem that ships as part of the mainline kernel. With OverlayFS
+you can do a few clever things:</p>
+<ul>
+<li>Use a read-only base filesystem with a writable overlay to create a
+  read/write union mount.</li>
+<li>Write to the union mount and only touch the overlay, leaving the
+  base filesystem pristine.</li>
+<li>Hide selected content in the base filesystem from the union mount,
+  through the use of
+  <a href="https://www.kernel.org/doc/Documentation/filesystems/overlayfs.txt">opaque directories</a>.</li>
+<li>Use one base filesystem with multiple overlays to create any number
+  of separate read/write union mounts.</li>
+<li>Immediately make updates to the base filesystem known to <em>all</em> union
+  mounts, by simply remounting them.</li>
+</ul>
+<p>This makes OverlayFS extremely powerful when used together with
+LXC. You define a bunch of overlay directories — one for each of
+your containers —, and they can all share one base filesystem:
+your host root filesystem.<sup id="fnref:automount"><a class="footnote-ref" href="#fn:automount" rel="footnote">3</a></sup></p>
+<p>Then, the union mount becomes your LXC container's root. It
+automatically has read access to everything that is available on the
+host, unless specifically hidden, and whatever it writes goes to the
+overlay. When you discard a container, you delete the overlay.</p>
+<p>Here is a minimal example configuration for a container like this:</p>
+<div class="highlight"><pre><span></span><span class="c1"># For additional config options, please look at lxc.container.conf(5)</span>
+<span class="c1"># Common configuration</span>
+<span class="na">lxc.include</span> <span class="o">=</span> <span class="s">/usr/share/lxc/config/ubuntu.common.conf</span>
+<span class="c1"># Container specific configuration</span>
+<span class="na">lxc.arch</span> <span class="o">=</span> <span class="s">amd64</span>
+<span class="c1"># Network configuration</span>
+<span class="na">lxc.network.type</span> <span class="o">=</span> <span class="s">veth</span>
+<span class="na">lxc.network.link</span> <span class="o">=</span> <span class="s">lxcbr0</span>
+<span class="na">lxc.network.flags</span> <span class="o">=</span> <span class="s">up</span>
+<span class="na">lxc.network.hwaddr</span> <span class="o">=</span> <span class="s">00:16:3e:76:59:10</span>
+<span class="c1"># Automatic mounts</span>
+<span class="na">lxc.mount.auto</span> <span class="o">=</span> <span class="s">proc sys cgroup</span>
+
+<span class="na">lxc.rootfs</span> <span class="o">=</span> <span class="s">overlayfs:/var/lib/lxc/host/rootfs:/var/lib/lxc/mytestcontainer/delta0</span>
+<span class="na">lxc.utsname</span> <span class="o">=</span> <span class="s">mytestcontainer</span>
+</pre></div>
+<p>Note that the LXC userland presently enforces an OverlayFS base
+directory to be in a subtree of <code>/var/lib/lxc</code>. You can satisfy this
+requirement by bind-mounting <code>/</code> to <code>/var/lib/lxc/host/rootfs</code>, as
+shown in the example above.</p>
+<p>What this creates, among other things, is crystal-clear separation of
+concerns: whatever is in the overlay is for your developers to
+decide. They can pull in packages from PyPI, Ruby Gems, NPMs,
+whatever. What's in the host root is your responsibility.</p>
+<h3>Automate, automate, automate</h3>
+<p>It's obvious and self-evident, but it doesn't hurt to reiterate: you
+want to automate <em>all</em> of this. You're certainly free to select your
+own tools to do it, but Ansible specifically has very good LXC
+container support so it makes this a breeze.</p>
+<p>Here's a simple Ansible playbook example that creates 100 containers,
+all based off your host root.<sup id="fnref:ansible"><a class="footnote-ref" href="#fn:ansible" rel="footnote">4</a></sup></p>
+<div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">hosts</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">localhost</span>
+  <span class="l l-Scalar l-Scalar-Plain">tasks</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Create a local bind mount for the host root filesystem</span>
+      <span class="l l-Scalar l-Scalar-Plain">mount</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/var/lib/lxc/host/rootfs</span>
+        <span class="l l-Scalar l-Scalar-Plain">src</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/</span>
+        <span class="l l-Scalar l-Scalar-Plain">opts</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">bind</span>
+        <span class="l l-Scalar l-Scalar-Plain">fstype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">none</span>
+        <span class="l l-Scalar l-Scalar-Plain">state</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mounted</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Create a template container using the host root</span>
+      <span class="l l-Scalar l-Scalar-Plain">lxc_container</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
+        <span class="l l-Scalar l-Scalar-Plain">state</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">stopped</span>
+        <span class="l l-Scalar l-Scalar-Plain">directory</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/var/lib/lxc/host/rootfs</span>
+        <span class="l l-Scalar l-Scalar-Plain">config</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/var/lib/lxc/host/config</span>
+        <span class="l l-Scalar l-Scalar-Plain">container_config</span><span class="p p-Indicator">:</span>
+          <span class="p p-Indicator">-</span> <span class="s">"lxc.mount.auto</span><span class="nv"> </span><span class="s">=</span><span class="nv"> </span><span class="s">proc</span><span class="nv"> </span><span class="s">sys</span><span class="nv"> </span><span class="s">cgroup"</span>
+          <span class="p p-Indicator">-</span> <span class="s">"lxc.include</span><span class="nv"> </span><span class="s">=</span><span class="nv"> </span><span class="s">/usr/share/lxc/config/ubuntu.common.conf"</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Create 100 OverlayFS based containers</span>
+      <span class="l l-Scalar l-Scalar-Plain">lxc_container</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
+        <span class="l l-Scalar l-Scalar-Plain">backing_store</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">overlayfs</span>
+        <span class="l l-Scalar l-Scalar-Plain">clone_snapshot</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+        <span class="l l-Scalar l-Scalar-Plain">clone_name</span><span class="p p-Indicator">:</span> <span class="s">"mytestcontainer{{</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">}}"</span>
+        <span class="l l-Scalar l-Scalar-Plain">state</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">started</span>
+      <span class="l l-Scalar l-Scalar-Plain">with_sequence</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">count=100</span>
+</pre></div>
+<p>Now of course, this will also mean that you'll need to get your
+developers to define their container config in Ansible. However, that
+is fundamentally a <em>good</em> thing, because it means that developers and
+operations people will be reading and writing the same language. Also,
+if your developers can write a Dockerfile, they won't have a hard time
+with Ansible YAML either.</p>
+<h2>How does this help?</h2>
+<p>With this approach, think of what you now have to do to make hundreds
+of containers running on the same box get a new libc.</p>
+<ol>
+<li>Update your host libc.</li>
+<li>Restart your containers.</li>
+</ol>
+<p>That's it. That is literally all you have to do to update hundreds of
+containers in one fell swoop. LXC will remount your OverlayFS on
+container restart, and thus all changes to the host will be
+immediately visible in the container's overlay filesystem.</p>
+<p>On an Ubuntu platform, you could even go so far as automating this in
+conjunction with unattended upgrades:</p>
+<div class="highlight"><pre><span></span><span class="c1"># /etc/apt/apt.conf.d/50unattended-upgrades</span>
+<span class="sr">//</span> <span class="n">Automatically</span> <span class="n">upgrade</span> <span class="n">packages</span> <span class="n">from</span> <span class="n">these</span> <span class="p">(</span><span class="n">origin:archive</span><span class="p">)</span> <span class="n">pairs</span>
+<span class="n">Unattended</span><span class="o">-</span><span class="nn">Upgrade::</span><span class="n">Allowed</span><span class="o">-</span><span class="n">Origins</span> <span class="p">{</span>
+    <span class="s">"${distro_id}:${distro_codename}-security"</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="c1"># /etc/apt/apt.conf.d/05lxc</span>
+<span class="nn">DPkg::</span><span class="n">Post</span><span class="o">-</span><span class="n">Invoke</span>      <span class="p">{</span> <span class="s">"/sbin/service lxc restart"</span><span class="p">;</span> <span class="p">};</span>
+</pre></div>
+<p>So there you have it. Upgrade loads of containers in minutes. No
+rebuild, no redeploy, nothing. Packaging actually does work and has
+merit, regardless of what the hipster crowd is trying to sell you.</p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="fn:twitter">
+<p>Edit, 2016-02-22: Added Twitter quote from Josh Long. <a class="footnote-backref" href="#fnref:twitter" rev="footnote" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:ubuntu">
+<p>At the time of writing, the latest Ubuntu LTS is 14.04 "Trusty
+Tahr", which is based on a Linux 3.13 kernel. This Ubuntu stock
+kernel ships with a pre-release version of OverlayFS which
+predates the 3.14 mainline merge. I would not recommend using that
+kernel; instead you'll want to run your hosts with a more recent
+kernel from the
+<a href="https://wiki.ubuntu.com/Kernel/LTSEnablementStack">LTS Enablement Stack</a>. Again
+at the time of writing, this is a Linux 4.2 kernel that ships with
+the <code>linux-generic-lts-wily</code> package. <a class="footnote-backref" href="#fnref:ubuntu" rev="footnote" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+<li id="fn:automount">
+<p>LXC containers do present per-container specific content for some
+directories by default, notably <code>/proc</code>, <code>/dev</code>, and <code>/sys</code>. Other
+host-filesystem content can be hidden by creating opaque
+directories in the container overlay; this is what you would
+commonly do for directories like <code>/root</code>, <code>/home</code>, <code>/tmp</code> and
+others. <a class="footnote-backref" href="#fnref:automount" rev="footnote" title="Jump back to footnote 3 in the text">↩</a></p>
+</li>
+<li id="fn:ansible">
+<p>Please note that it's not <em>quite</em> as simple as shown in the
+Ansible example. You will want to provide some additional tweaks,
+such as added mounts or opaque directories. I've tried to keep the
+example brief to illustrate the concept. <a class="footnote-backref" href="#fnref:ansible" rev="footnote" title="Jump back to footnote 4 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="fghaas.github.io/xahteiwi.eu/images/avatar.jpg"/>
+        </p>
+</div><!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://twitter.com/xahteiwi"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+    <li class="list-group-item"><a href="https://www.linkedin.com/in/fghaas"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn</a></li>
+    <li class="list-group-item"><a href="https://reddit.com/u/fghaas"><i class="fa fa-reddit-square fa-lg"></i> Reddit</a></li>
+    <li class="list-group-item"><a href="https://github.com/fghaas"><i class="fa fa-github-square fa-lg"></i> GitHub</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="fghaas.github.io/xahteiwi.eu/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ansible.html">Ansible</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ceph.html">Ceph</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/cloudify.html">Cloudify</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/conference.html">Conference</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/containers.html">Containers</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/corosync.html">Corosync</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/development.html">Development</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/drbd.html">DRBD</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/flashcache.html">Flashcache</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/galera.html">Galera</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/glusterfs.html">GlusterFS</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/heat.html">Heat</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/high-availability.html">High Availability</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/juju.html">Juju</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/kvm.html">KVM</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/lca2014.html">lca2014</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/libvirt.html">libvirt</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/lxc.html">LXC</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/mysql.html">MySQL</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/open-edx.html">Open edX</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/openstack.html">OpenStack</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/oscon.html">OSCON</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/pacemaker.html">Pacemaker</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/performance.html">Performance</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/philosophy.html">Philosophy</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/suse.html">SUSE</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="fghaas.github.io/xahteiwi.eu/tag/ubuntu.html">Ubuntu</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="/legal" target="_blank">Legal info</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container-fluid">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 Florian Haas
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">Creative Commons Attribution-ShareAlike 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="fghaas.github.io/xahteiwi.eu/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>
