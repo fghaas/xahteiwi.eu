@@ -2692,18 +2692,19 @@ The full video (courtesy of the Ceph team at Red Hat) and Florian's
 slides are below.&lt;/p&gt;
 &lt;div class="alert alert-dismissible alert-info"&gt;
 &lt;p&gt;&lt;button class="close" data-dismiss="alert" type="button"&gt;×&lt;/button&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you're interested in Ceph performance optimization, you
-  may …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Mystified about Ceph performance tuning and benchmarking? Don't
+&lt;/div&gt;
+&lt;div class="embed-responsive embed-responsive-16by9"&gt;
+&lt;iframe class="embed-responsive-item" src="//www.youtube.com/embed/0B_A9VkRb1E"&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;div class="embed-responsive embed-responsive-16by9"&gt;
+&lt;iframe class="embed-responsive-item" src="//hastexo.github.io/ceph-day-london/"&gt;&lt;/iframe&gt;
+&lt;/div&gt;</summary><content type="html">&lt;p&gt;Mystified about Ceph performance tuning and benchmarking? Don't
 despair! Florian is here to help.&lt;/p&gt;
 &lt;p&gt;This presentation was given at Ceph Day London in 2014. &lt;!--break--&gt;
 The full video (courtesy of the Ceph team at Red Hat) and Florian's
 slides are below.&lt;/p&gt;
 &lt;div class="alert alert-dismissible alert-info"&gt;
 &lt;p&gt;&lt;button class="close" data-dismiss="alert" type="button"&gt;×&lt;/button&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you're interested in Ceph performance optimization, you
-  may want to take a look at &lt;a href="{filename}/pages/services/academy/hx113.md"&gt;our HX113
-  class&lt;/a&gt; which we've put
-  together to focus exclusively on Ceph performance issues.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="embed-responsive embed-responsive-16by9"&gt;
 &lt;iframe class="embed-responsive-item" src="//www.youtube.com/embed/0B_A9VkRb1E"&gt;&lt;/iframe&gt;

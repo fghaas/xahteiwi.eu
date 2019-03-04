@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://fghaas.github.io/xahteiwi.eu/</loc>
-<lastmod>2019-03-03T21:12:33-00:00</lastmod>
+<lastmod>2019-03-04T22:02:59-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://fghaas.github.io/xahteiwi.eu/archives.html</loc>
-<lastmod>2019-03-03T21:12:33-00:00</lastmod>
+<lastmod>2019-03-04T22:02:59-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://fghaas.github.io/xahteiwi.eu/tags.html</loc>
-<lastmod>2019-03-03T21:12:33-00:00</lastmod>
+<lastmod>2019-03-04T22:02:59-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://fghaas.github.io/xahteiwi.eu/categories.html</loc>
-<lastmod>2019-03-03T21:12:33-00:00</lastmod>
+<lastmod>2019-03-04T22:02:59-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -683,7 +683,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://fghaas.github.io/xahteiwi.eu/category/blogs.html</loc>
+<loc>https://fghaas.github.io/xahteiwi.eu/category/blog.html</loc>
 <lastmod>2018-02-18T00:00:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
