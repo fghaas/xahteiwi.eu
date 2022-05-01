@@ -10,25 +10,25 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="https://xahteiwi.eu/theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../theme/stylesheet/style.min.css">
 
     <link id="dark-theme-style" rel="stylesheet" type="text/css"
           media="(prefers-color-scheme: dark)"
-    href="https://xahteiwi.eu/theme/stylesheet/dark-theme.min.css">
+    href="../../../theme/stylesheet/dark-theme.min.css">
 
     <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
               media="(prefers-color-scheme: dark)"
-          href="https://xahteiwi.eu/theme/pygments/monokai.min.css">
+          href="../../../theme/pygments/monokai.min.css">
     <link id="pygments-light-theme" rel="stylesheet" type="text/css"
               media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
-          href="https://xahteiwi.eu/theme/pygments/github.min.css">
+          href="../../../theme/pygments/github.min.css">
 
 
-  <link rel="stylesheet" type="text/css" href="https://xahteiwi.eu/theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="https://xahteiwi.eu/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="https://xahteiwi.eu/theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="../../../theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="../../../theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="../../../theme/font-awesome/css/solid.css">
 
-    <link rel="stylesheet" type="text/css" href="https://xahteiwi.eu/css/override.css">
+    <link rel="stylesheet" type="text/css" href="../../../css/override.css">
 
     <link href="https://xahteiwi.eu/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="xahteiwi.eu Atom">
 
@@ -41,19 +41,19 @@
  
 
 <meta name="author" content="Florian Haas" />
-<meta name="description" content="When you are using functionality that is buried deep in the Linux kernel, ftrace can be extremely useful. Here are some suggestions on how to use it, using the example of tracing function calls from qemu-guest-agent. What’s this about? Recently I used, for the first time, libvirt’s functionality …" />
+<meta name="description" content="When you are using functionality that is buried deep in the Linux kernel, ftrace can be extremely useful. Here are some suggestions on how to use it, using the example of tracing function calls from qemu-guest-agent." />
 <meta name="keywords" content="libvirt, Linux, ftrace, Qemu">
 
 
   <meta property="og:site_name" content="xahteiwi.eu"/>
   <meta property="og:title" content="Using ftrace to trace function calls from qemu-guest-agent"/>
-  <meta property="og:description" content="When you are using functionality that is buried deep in the Linux kernel, ftrace can be extremely useful. Here are some suggestions on how to use it, using the example of tracing function calls from qemu-guest-agent. What’s this about? Recently I used, for the first time, libvirt’s functionality …"/>
+  <meta property="og:description" content="When you are using functionality that is buried deep in the Linux kernel, ftrace can be extremely useful. Here are some suggestions on how to use it, using the example of tracing function calls from qemu-guest-agent."/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:url" content="https://xahteiwi.eu/resources/hints-and-kinks/ftrace-qemu-ga/"/>
+  <meta property="og:url" content="../../../resources/hints-and-kinks/ftrace-qemu-ga/"/>
   <meta property="og:type" content="article"/>
   <meta property="article:published_time" content="2019-08-21 00:00:00+00:00"/>
   <meta property="article:modified_time" content=""/>
-  <meta property="article:author" content="https://xahteiwi.eu/author/florian-haas.html">
+  <meta property="article:author" content="../../../author/florian-haas.html">
   <meta property="article:section" content="hints-and-kinks"/>
   <meta property="article:tag" content="libvirt"/>
   <meta property="article:tag" content="Linux"/>
@@ -67,12 +67,12 @@
 <body >
   <aside>
     <div>
-      <a href="https://xahteiwi.eu/">
+      <a href="../../../">
         <img src="https://xahteiwi.eu/images/avatar.jpg" alt="" title="">
       </a>
 
       <h1>
-        <a href="https://xahteiwi.eu/"></a>
+        <a href="../../../"></a>
       </h1>
 
 
@@ -106,7 +106,7 @@
   <main>
 
     <nav>
-      <a href="https://xahteiwi.eu/">Home</a>
+      <a href="../../../">Home</a>
 
       <a href="/category/hints-and-kinks.html">Tech</a>
       <a href="/category/presentations.html">Talks</a>
@@ -131,7 +131,7 @@
       
     <h1 id="ftrace-qemu-ga">Using ftrace to trace function calls from qemu-guest-agent</h1>
     <p>
-      Posted on Wed 21 August 2019 in <a href="https://xahteiwi.eu/category/hints-and-kinks.html">hints-and-kinks</a>
+      Posted on Wed 21 August 2019 in <a href="../../../category/hints-and-kinks.html">hints-and-kinks</a>
 
     </p>
   </header>
@@ -142,7 +142,7 @@
 kernel, <a href="https://en.wikipedia.org/wiki/Ftrace"><code>ftrace</code></a> can be
 extremely useful. Here are some suggestions on how to use it, using
 the example of tracing function calls from <code>qemu-guest-agent</code>.</p>
-<!--break-->
+
 <h2>What’s this about?</h2>
 <p>Recently I used, for the first time,
 <strong><a href="https://libvirt.org/">libvirt</a>’s functionality to indicate to a
@@ -279,10 +279,10 @@ see him! He is the primary author of the ftrace framework.</p>
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="https://xahteiwi.eu/tag/libvirt.html">libvirt</a>
-      <a href="https://xahteiwi.eu/tag/linux.html">Linux</a>
-      <a href="https://xahteiwi.eu/tag/ftrace.html">ftrace</a>
-      <a href="https://xahteiwi.eu/tag/qemu.html">Qemu</a>
+      <a href="../../../tag/libvirt.html">libvirt</a>
+      <a href="../../../tag/linux.html">Linux</a>
+      <a href="../../../tag/ftrace.html">ftrace</a>
+      <a href="../../../tag/qemu.html">Qemu</a>
     </p>
   </div>
 
@@ -302,7 +302,7 @@ Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a 
   <span class="footer-separator">|</span>
   Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
   <script id="dark-theme-script"
-          src="https://xahteiwi.eu/theme/dark-theme/dark-theme.min.js"
+          src="../../../theme/dark-theme/dark-theme.min.js"
           data-enable-auto-detect-theme="True"
           data-default-theme="light"
           type="text/javascript">
@@ -329,7 +329,7 @@ Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a 
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " xahteiwi.eu ",
-  "url" : "https://xahteiwi.eu",
+  "url" : "../../..",
   "image": "https://xahteiwi.eu/images/avatar.jpg",
   "description": ""
 }

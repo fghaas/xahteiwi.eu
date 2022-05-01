@@ -10,25 +10,25 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="https://xahteiwi.eu/theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../../theme/stylesheet/style.min.css">
 
     <link id="dark-theme-style" rel="stylesheet" type="text/css"
           media="(prefers-color-scheme: dark)"
-    href="https://xahteiwi.eu/theme/stylesheet/dark-theme.min.css">
+    href="../../../../../theme/stylesheet/dark-theme.min.css">
 
     <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
               media="(prefers-color-scheme: dark)"
-          href="https://xahteiwi.eu/theme/pygments/monokai.min.css">
+          href="../../../../../theme/pygments/monokai.min.css">
     <link id="pygments-light-theme" rel="stylesheet" type="text/css"
               media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
-          href="https://xahteiwi.eu/theme/pygments/github.min.css">
+          href="../../../../../theme/pygments/github.min.css">
 
 
-  <link rel="stylesheet" type="text/css" href="https://xahteiwi.eu/theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="https://xahteiwi.eu/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="https://xahteiwi.eu/theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="../../../../../theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="../../../../../theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="../../../../../theme/font-awesome/css/solid.css">
 
-    <link rel="stylesheet" type="text/css" href="https://xahteiwi.eu/css/override.css">
+    <link rel="stylesheet" type="text/css" href="../../../../../css/override.css">
 
     <link href="https://xahteiwi.eu/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="xahteiwi.eu Atom">
 
@@ -44,18 +44,18 @@
 <meta name="description" content="Musings on source code management, code review, testing, deployment, and collaboration culture." />
 <meta name="keywords" content="Work, CI, Gerrit, GitLab, GitHub, Zuul">
 
-<link rel="alternate" href="https://xahteiwi.eu/./blog/2022/01/29/review-review/" hreflang="en" />
-<link rel="alternate" href="https://xahteiwi.eu/./talk-submissions/review-review/" hreflang="en" />
+<link rel="alternate" href="../../../../.././blog/2022/01/29/review-review/" hreflang="en" />
+<link rel="alternate" href="../../../../.././talk-submissions/review-review/" hreflang="en" />
 
   <meta property="og:site_name" content="xahteiwi.eu"/>
   <meta property="og:title" content="The Review Review"/>
   <meta property="og:description" content="Musings on source code management, code review, testing, deployment, and collaboration culture."/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:url" content="https://xahteiwi.eu/./blog/2022/01/29/review-review/"/>
+  <meta property="og:url" content="../../../../.././blog/2022/01/29/review-review/"/>
   <meta property="og:type" content="article"/>
   <meta property="article:published_time" content="2022-01-29 00:00:00+00:00"/>
   <meta property="article:modified_time" content=""/>
-  <meta property="article:author" content="https://xahteiwi.eu/author/florian-haas.html">
+  <meta property="article:author" content="../../../../../author/florian-haas.html">
   <meta property="article:section" content="blog"/>
   <meta property="article:tag" content="Work"/>
   <meta property="article:tag" content="CI"/>
@@ -71,12 +71,12 @@
 <body >
   <aside>
     <div>
-      <a href="https://xahteiwi.eu/">
+      <a href="../../../../../">
         <img src="https://xahteiwi.eu/images/avatar.jpg" alt="" title="">
       </a>
 
       <h1>
-        <a href="https://xahteiwi.eu/"></a>
+        <a href="../../../../../"></a>
       </h1>
 
 
@@ -110,7 +110,7 @@
   <main>
 
     <nav>
-      <a href="https://xahteiwi.eu/">Home</a>
+      <a href="../../../../../">Home</a>
 
       <a href="/category/hints-and-kinks.html">Tech</a>
       <a href="/category/presentations.html">Talks</a>
@@ -133,13 +133,13 @@
 <article class="single">
   <header>
           <div class="translations">
-    <a class="active" href="https://xahteiwi.eu/./blog/2022/01/29/review-review/">en</a>
-        <a href="https://xahteiwi.eu/./talk-submissions/review-review/">en</a>
+    <a class="active" href="../../../../.././blog/2022/01/29/review-review/">en</a>
+        <a href="../../../../.././talk-submissions/review-review/">en</a>
     </div>
 
     <h1 id="review-review">The Review Review</h1>
     <p>
-      Posted on Sat 29 January 2022 in <a href="https://xahteiwi.eu/category/blog.html">blog</a>
+      Posted on Sat 29 January 2022 in <a href="../../../../../category/blog.html">blog</a>
 
     </p>
   </header>
@@ -161,7 +161,7 @@ they relate.</p>
 </ul>
 <p>In case it’s not obvious, that means I’m talking about a large
 fraction of the software engineering cycle. Not all of it; the part
-involving “fooling around” (<a href="https://xahteiwi.eu/blog/2021/11/21/creativity/">creative play</a>)
+involving “fooling around” (<a href="../../../../../blog/2021/11/21/creativity/">creative play</a>)
 is perhaps excluded — but substantially everything where people can be
 said to be “developing” in a software engineering organization is
 encompassed in these things.</p>
@@ -216,7 +216,7 @@ MD’s responsibility.</p>
 <p>Of course, that person may delegate some of the <em>tasks</em> and details of
 running your source code management and code review and CI/CD
 platform, but <em>responsibility</em> stays with them.</p>
-<p>And that responsibility requires both an understanding <a href="https://xahteiwi.eu/blog/2019/04/21/non-technical/">of the
+<p>And that responsibility requires both an understanding <a href="../../../../../blog/2019/04/21/non-technical/">of the
 technology itself</a>, <em>and</em> an understanding
 of how it interacts with your engineering culture. A <em>profound</em>
 understanding. </p>
@@ -533,12 +533,12 @@ depends on your priorities. And I’ll give you this from four angles.</p>
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="https://xahteiwi.eu/tag/work.html">Work</a>
-      <a href="https://xahteiwi.eu/tag/ci.html">CI</a>
-      <a href="https://xahteiwi.eu/tag/gerrit.html">Gerrit</a>
-      <a href="https://xahteiwi.eu/tag/gitlab.html">GitLab</a>
-      <a href="https://xahteiwi.eu/tag/github.html">GitHub</a>
-      <a href="https://xahteiwi.eu/tag/zuul.html">Zuul</a>
+      <a href="../../../../../tag/work.html">Work</a>
+      <a href="../../../../../tag/ci.html">CI</a>
+      <a href="../../../../../tag/gerrit.html">Gerrit</a>
+      <a href="../../../../../tag/gitlab.html">GitLab</a>
+      <a href="../../../../../tag/github.html">GitHub</a>
+      <a href="../../../../../tag/zuul.html">Zuul</a>
     </p>
   </div>
 
@@ -558,7 +558,7 @@ Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a 
   <span class="footer-separator">|</span>
   Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
   <script id="dark-theme-script"
-          src="https://xahteiwi.eu/theme/dark-theme/dark-theme.min.js"
+          src="../../../../../theme/dark-theme/dark-theme.min.js"
           data-enable-auto-detect-theme="True"
           data-default-theme="light"
           type="text/javascript">
@@ -585,7 +585,7 @@ Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a 
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " xahteiwi.eu ",
-  "url" : "https://xahteiwi.eu",
+  "url" : "../../../../..",
   "image": "https://xahteiwi.eu/images/avatar.jpg",
   "description": ""
 }
